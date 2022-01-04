@@ -1,0 +1,1 @@
+Placeholder for firebase api module readme
