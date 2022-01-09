@@ -1,1 +1,3 @@
 .vs/*
+/GUI/build-LabBPM-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/*
+LabBPM.pro.user

@@ -1,46 +1,28 @@
-#include <QApplication>
-#include <QLocale>
-#include <QTranslator>
-#include <QLabel>
-#include <QPushButton>
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QMainWindow>
-#include <locale.h>
+#include "includes.h"
 
 int main(int argc, char *argv[])
 {
     setlocale( LC_ALL,"Russian" );
     QApplication App(argc, argv);
-    QTranslator Translator;
-    QLabel Label("Ты джавист?");
-    QPushButton *PButtonYes = new QPushButton ("Нет!");
-    QPushButton *PButtonOfc = new QPushButton ("Конечно нет!");
-    QPushButton *PButtonPnh = new QPushButton ("Да (Пойти нахуй)");
-    QWidget *Widget = new QWidget();
-    QVBoxLayout *VLay = new QVBoxLayout(Widget);
     QMainWindow Window;
 
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "LabBPM_" + QLocale(locale).name();
-        if (Translator.load(":/i18n/" + baseName)) {
-            App.installTranslator(&Translator);
-            break;
-        }
-    }
+    // This should be moved to special function or class method (idk i'm bad at OOP)
+    char acCompilerPath[256];
+    getcwd(acCompilerPath, 256); //this will return path to compilator, but we need upper directory
 
-    QObject :: connect (PButtonYes, SIGNAL(clicked()), &Label, SLOT(mysettext("Фу")));
-    QObject :: connect (PButtonOfc, SIGNAL(clicked()), &Label, SLOT(mysettext("Мерзость")));
-    QObject :: connect (PButtonPnh, SIGNAL(clicked()), &App, SLOT(quit()));
+    std::string sCurrPath= acCompilerPath;
+    std::string sGui (PATH_SPLIT_TOKEN);
+    std::string sLbpm (PATH_ADD_TOKEN);
+    std::string sPicName (POTATO_PIC_NAME);
+    std::string sWorkDir = sCurrPath.substr(0, sCurrPath.find(sGui));
 
-    VLay->addWidget(&Label);
-    VLay->addWidget(PButtonYes);
-    VLay->addWidget(PButtonOfc);
-    VLay->addWidget(PButtonPnh);
+    sWorkDir.append (sGui + '\\' + sLbpm + '\\' + sPicName);
+    // end of block that gotta be moved
 
-    Widget->setLayout(VLay);
-    Window.setCentralWidget(Widget);
+    Window.resize (512, 512);
+    Window.setWindowIcon (QIcon (QString::fromStdString(sWorkDir)));
+    Window.setWindowTitle ("Laboratory Business Process Manager");
+    Window.setToolTip ("Laboratory Business Process Manager");
     Window.show();
     return App.exec ();
 }
