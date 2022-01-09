@@ -14,5 +14,6 @@
 #include <filesystem>
 #include <unistd.h>
 #include "defines.h"
+#include "icon.h"
 
 #endif // GLOB_INC
