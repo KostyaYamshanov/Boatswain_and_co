@@ -9,4 +9,8 @@
 #define PATH_ADD_TOKEN "LabBPM"
 #define POTATO_PIC_NAME "potato.png"
 
-int IcnSetIcon (QMainWindow *pWindow);
+class Icon 
+{
+public:
+    void SetIcon (QMainWindow *pWindow);
+};
