@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include <filesystem>
 #include <unistd.h>
+#include <QIcon>
 
 // Path related macros
 #define PATH_SPLIT_TOKEN "GUI"
