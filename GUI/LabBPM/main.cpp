@@ -4,10 +4,10 @@ int main(int argc, char *argv[])
 {
     setlocale( LC_ALL,"Russian" );
 
-    QMainWindow     Window;
-    QApplication    App(argc, argv);
-    GreenHouse      GreenHouseHandler;
-    Icon            IconHandler;
+    Icon IconHandler;
+    QApplication App(argc, argv);
+    QMainWindow Window;
+    GreenHouse GreenHouseHandler;
 
 
     IconHandler.SetIcon (&Window);
