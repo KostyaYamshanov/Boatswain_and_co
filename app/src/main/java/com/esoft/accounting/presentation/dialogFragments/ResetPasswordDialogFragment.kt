@@ -1,9 +1,8 @@
-package com.esoft.accounting.fragments.dialogFragments
+package com.esoft.accounting.presentation.dialogFragments
 
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +19,7 @@ class ResetPasswordDialogFragment : DialogFragment() {
     private lateinit var viewModel: ResetPasswordDialogViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        viewModel = ViewModelProvider(this, ResetPasswordViewModelFactory(requireContext())).get(ResetPasswordDialogViewModel::class.java)
+        viewModel = ViewModelProvider(this, ResetPasswordViewModelFactory(requireActivity().application)).get(ResetPasswordDialogViewModel::class.java)
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

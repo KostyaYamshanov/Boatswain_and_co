@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.esoft.accounting.fragments.loginFragment.LoginFragment"
+        android:name="com.esoft.accounting.presentation.loginFragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -20,12 +20,12 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.esoft.accounting.fragments.registerFragment.RegisterFragment"
+        android:name="com.esoft.accounting.presentation.registerFragment.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.esoft.accounting.fragments.listFragment.ListFragment"
+        android:name="com.esoft.accounting.presentation.listFragment.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/newRecordingFragment"
-        android:name="com.esoft.accounting.fragments.newRecording.NewRecordingFragment"
+        android:name="com.esoft.accounting.presentation.newRecording.NewRecordingFragment"
         android:label="fragment_new_recording"
         tools:layout="@layout/fragment_new_recording" />
 </navigation>

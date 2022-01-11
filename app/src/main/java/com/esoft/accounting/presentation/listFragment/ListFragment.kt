@@ -1,4 +1,4 @@
-package com.esoft.accounting.fragments.listFragment
+package com.esoft.accounting.presentation.listFragment
 
 import android.os.Bundle
 import android.view.View

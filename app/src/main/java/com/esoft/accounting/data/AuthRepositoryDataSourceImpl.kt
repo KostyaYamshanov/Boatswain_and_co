@@ -1,16 +1,30 @@
 package com.esoft.accounting.data
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class AuthRepository(val context: Context) {
+interface AuthRepositoryDataSource {
+
+    fun login(email: String, password: String)
+
+    fun registration(email: String, password: String)
+
+    fun resetPassword(email: String)
+
+    fun logOut()
+
+    fun getUserLiveData(): MutableLiveData<FirebaseUser>
+
+    fun userTask(): MutableLiveData<Boolean>
+
+}
+
+class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
 
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val userLiveData = MutableLiveData<FirebaseUser>()
@@ -25,7 +39,7 @@ class AuthRepository(val context: Context) {
     }
 
     @SuppressLint("NewApi")
-    fun login(email: String, password: String) {
+    override fun login(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                 if (task.isSuccessful) {
@@ -35,21 +49,11 @@ class AuthRepository(val context: Context) {
                     if (user!!.isEmailVerified) {
                         userTask.postValue(true)
                     } else {
-                        Toast.makeText(
-                            context,
-                            "Подтвердите почту",
-                            Toast.LENGTH_SHORT
-                        ).show();
                         Log.d("AuthRepository", "fun login: Пользователь не подтвердил почту")
                     }
                     Log.d("AuthRepository", "fun login: true")
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(
-                        context,
-                        "Ошибка входа",
-                        Toast.LENGTH_SHORT
-                    ).show();
                     userTask.postValue(false)
                     Log.d("AuthRepository", "fun login: false")
                 }
@@ -59,7 +63,7 @@ class AuthRepository(val context: Context) {
     }
 
     @SuppressLint("NewApi")
-    fun registration(email: String, password: String) {
+    override fun registration(email: String, password: String) {
         firebaseAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                 if (task.isSuccessful) {
@@ -75,11 +79,6 @@ class AuthRepository(val context: Context) {
                     Log.d("AuthRepository", "fun register: true")
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(
-                        context,
-                        "Ошибка регистрации",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     userTask.postValue(false)
                     Log.d("AuthRepository", "fun register: false")
                 }
@@ -89,7 +88,7 @@ class AuthRepository(val context: Context) {
 
     }
 
-    fun resetPassword(email: String) {
+    override fun resetPassword(email: String) {
         if (firebaseAuth.currentUser != null && firebaseAuth.currentUser!!.email == email) {
             firebaseAuth.sendPasswordResetEmail(email)
             userTask.postValue(true)
@@ -98,20 +97,17 @@ class AuthRepository(val context: Context) {
         }
     }
 
-    fun logOut() {
+    override fun logOut() {
         firebaseAuth.signOut()
         loggedOutLiveData!!.postValue(true)
     }
 
-    fun userTask(): MutableLiveData<Boolean> {
+    override fun userTask(): MutableLiveData<Boolean> {
         return userTask
     }
 
-    fun getUserLiveData(): MutableLiveData<FirebaseUser> {
+    override fun getUserLiveData(): MutableLiveData<FirebaseUser> {
         return userLiveData
     }
 
-    fun getLoggedOutLiveData(): MutableLiveData<Boolean> {
-        return loggedOutLiveData
-    }
 }

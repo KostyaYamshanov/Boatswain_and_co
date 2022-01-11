@@ -1,4 +1,4 @@
-package com.esoft.accounting.fragments.registerFragment
+package com.esoft.accounting.presentation.registerFragment
 
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.FragmentRegisterBinding
 import androidx.lifecycle.ViewModelProvider
-import com.esoft.accounting.fragments.dialogFragments.EmailCheckFragment
+import com.esoft.accounting.presentation.dialogFragments.EmailCheckFragment
 
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -23,7 +23,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, RegisterViewModelFactory(requireContext())).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this, RegisterViewModelFactory(requireActivity().application)).get(RegisterViewModel::class.java)
         dialogEmailCheck = EmailCheckFragment(getString(R.string.verification))
 
         progressDialog = ProgressDialog(this.context)

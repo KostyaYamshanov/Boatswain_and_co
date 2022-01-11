@@ -1,18 +1,16 @@
-package com.esoft.accounting.fragments.loginFragment
+package com.esoft.accounting.presentation.loginFragment
 
+import android.app.Application
 import android.app.ProgressDialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.esoft.accounting.databinding.FragmentLoginBinding
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.R
-import com.esoft.accounting.fragments.dialogFragments.ResetPasswordDialogFragment
+import com.esoft.accounting.presentation.dialogFragments.ResetPasswordDialogFragment
 import com.esoft.accounting.settings.Settings
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -24,10 +22,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var resetPasswordDialog: ResetPasswordDialogFragment
     private lateinit var settings: Settings
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(requireContext())).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(application = requireActivity().application)).get(LoginViewModel::class.java)
 
         settings = Settings(this.requireContext())
         resetPasswordDialog = ResetPasswordDialogFragment()

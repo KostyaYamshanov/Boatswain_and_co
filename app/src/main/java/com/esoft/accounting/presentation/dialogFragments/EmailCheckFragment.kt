@@ -1,4 +1,4 @@
-package com.esoft.accounting.fragments.dialogFragments
+package com.esoft.accounting.presentation.dialogFragments
 
 import android.app.Dialog
 import android.graphics.Color
