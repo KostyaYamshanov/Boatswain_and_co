@@ -1,6 +1,5 @@
 package com.esoft.accounting.fragments.registerFragment
 
-import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.esoft.accounting.data.AuthRepository

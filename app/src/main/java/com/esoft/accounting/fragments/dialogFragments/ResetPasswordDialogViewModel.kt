@@ -1,8 +1,5 @@
 package com.esoft.accounting.fragments.dialogFragments
 
-import android.app.Activity
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.esoft.accounting.data.AuthRepository
