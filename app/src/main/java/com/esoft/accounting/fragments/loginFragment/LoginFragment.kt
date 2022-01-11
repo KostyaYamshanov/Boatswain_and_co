@@ -2,8 +2,10 @@ package com.esoft.accounting.fragments.loginFragment
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.esoft.accounting.databinding.FragmentLoginBinding
@@ -35,7 +37,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         progressDialog.setMessage("Вход")
 
         if (settings.getSaveMePref()) {
-            loginViewModel.userLiveData.observe(this,
+            loginViewModel.userLiveData.observe(viewLifecycleOwner,
                 { firebaseUser ->
                     if (firebaseUser != null && firebaseUser.isEmailVerified) {
                         navController.navigate(R.id.action_loginFragment_to_listFragment)
@@ -57,6 +59,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             val password = loginBinding.textPassInput.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 loginViewModel.login(email = email, password = password)
+                loginBinding.textField1.error = null
+                loginBinding.textField2.error = null
                 progressDialog.show()
                 loginViewModel.taskLogin.observe(viewLifecycleOwner, {
                     if (it) {
@@ -65,14 +69,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     }
                     progressDialog.dismiss()
                 })
-            } else {
-                Toast.makeText(
-                    this.context,
-                    "Пожалуйста введите почту и пароль!",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+            }else {
 
+                if (email.isEmpty()) {
+                    loginBinding.textField1.error = "Введите email"
+                }else{
+                    loginBinding.textField1.error = null
+                }
+                if (password.isEmpty()) {
+                    loginBinding.textField2.error = "Введите пароль"
+                }else{
+                    loginBinding.textField2.error = null
+                }
+            }
         }
 
         loginBinding.saveLoginAc.setOnCheckedChangeListener { compoundButton, b ->
@@ -87,9 +96,5 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             fragmentManager?.let { it1 -> resetPasswordDialog.show(it1, "dialogResetPassword") }
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 }
