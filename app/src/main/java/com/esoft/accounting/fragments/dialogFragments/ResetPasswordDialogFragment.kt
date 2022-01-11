@@ -1,15 +1,14 @@
 package com.esoft.accounting.fragments.dialogFragments
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.R
@@ -19,7 +18,6 @@ class ResetPasswordDialogFragment : DialogFragment() {
 
     private lateinit var bindingReset: ResetPasswordDialogFragmentBinding
     private lateinit var viewModel: ResetPasswordDialogViewModel
-    private lateinit var emailCheckFragment: EmailCheckFragment
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         viewModel = ViewModelProvider(this, ResetPasswordViewModelFactory(requireContext())).get(ResetPasswordDialogViewModel::class.java)
@@ -34,7 +32,6 @@ class ResetPasswordDialogFragment : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bindingReset = ResetPasswordDialogFragmentBinding.inflate(inflater, container, false)
         onClick()
-        emailCheckFragment = EmailCheckFragment(getString(R.string.textResetEmailSend))
         return bindingReset.root
     }
 
@@ -45,15 +42,24 @@ class ResetPasswordDialogFragment : DialogFragment() {
             viewModel.taskResetLiveData.observe(this, {
                 if (!it) {
                     bindingReset.textField1.error = getString(R.string.failed_email)
+                    bindingReset.resetLayout.visibility = View.VISIBLE
+                    bindingReset.resetMsgSendLayout.visibility = View.GONE
                 }else{
                     bindingReset.textField1.error = null
-                    fragmentManager?.let { it1 -> emailCheckFragment.show(it1, "dialogResetEmailSend") }
-                    dismiss()
+                    bindingReset.resetLayout.visibility = View.GONE
+                    bindingReset.resetMsgSendLayout.visibility = View.VISIBLE
+
                 }
             })
         }
 
         bindingReset.cancel.setOnClickListener {
+            dismiss()
+            bindingReset.textField1.error = null
+            bindingReset.textLoginReset.text = null
+        }
+
+        bindingReset.sendOk.setOnClickListener {
             dismiss()
             bindingReset.textField1.error = null
             bindingReset.textLoginReset.text = null
