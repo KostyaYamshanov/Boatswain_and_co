@@ -37,7 +37,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         progressDialog.setMessage("Вход")
 
         if (settings.getSaveMePref()) {
-            loginViewModel.userLiveData.observe(viewLifecycleOwner,
+            loginViewModel.getUserLiveData().observe(viewLifecycleOwner,
                 { firebaseUser ->
                     if (firebaseUser != null && firebaseUser.isEmailVerified) {
                         navController.navigate(R.id.action_loginFragment_to_listFragment)
@@ -62,7 +62,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 loginBinding.textField1.error = null
                 loginBinding.textField2.error = null
                 progressDialog.show()
-                loginViewModel.taskLogin.observe(viewLifecycleOwner, {
+                loginViewModel.getTaskLiveData().observe(viewLifecycleOwner, {
                     if (it) {
                         progressDialog.dismiss()
                         navController.navigate(R.id.action_loginFragment_to_listFragment)

@@ -45,7 +45,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 viewModel.register(email = email, password = password)
                 progressDialog.show()
-                viewModel.taskRegister.observe(viewLifecycleOwner,
+                viewModel.getTaskLiveData().observe(viewLifecycleOwner,
                     {
                         if (it) {
                             progressDialog.dismiss()

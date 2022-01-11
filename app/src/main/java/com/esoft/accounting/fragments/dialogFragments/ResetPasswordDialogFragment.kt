@@ -39,7 +39,7 @@ class ResetPasswordDialogFragment : DialogFragment() {
         bindingReset.resetBtn.setOnClickListener {
             val email = bindingReset.textLoginReset.text.toString()
             viewModel.resetPassword(email = email)
-            viewModel.taskResetLiveData.observe(this, {
+            viewModel.getTaskLiveData().observe(this, {
                 if (!it) {
                     bindingReset.textField1.error = getString(R.string.failed_email)
                     bindingReset.resetLayout.visibility = View.VISIBLE
