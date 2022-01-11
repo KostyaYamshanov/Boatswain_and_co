@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseUser
 
 class RegisterViewModel(private val authRepository: AuthRepository) : ViewModel() {
 
-    val taskRegister = authRepository.getTaskRegister()
+    val taskRegister = authRepository.userTask()
 
     fun register(email: String, password: String) {
         authRepository.registration(email = email, password = password)

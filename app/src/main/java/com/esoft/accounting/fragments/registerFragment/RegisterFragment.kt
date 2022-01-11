@@ -52,6 +52,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                             fragmentManager?.let { it1 -> dialogEmailCheck.show(it1, "dialogEmailCheck") }
                             activity?.onBackPressed()
                         }
+                        progressDialog.dismiss()
                     })
             } else {
                 Toast.makeText(this.context, "Заполните данные!", Toast.LENGTH_LONG).show()
