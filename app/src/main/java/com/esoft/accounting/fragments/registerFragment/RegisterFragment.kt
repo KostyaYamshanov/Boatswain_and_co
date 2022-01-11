@@ -23,8 +23,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        dialogEmailCheck = EmailCheckFragment()
+        viewModel = ViewModelProvider(this, RegisterViewModelFactory(requireContext())).get(RegisterViewModel::class.java)
+        dialogEmailCheck = EmailCheckFragment(getString(R.string.verification))
 
         progressDialog = ProgressDialog(this.context)
         progressDialog.setTitle("Подождите")

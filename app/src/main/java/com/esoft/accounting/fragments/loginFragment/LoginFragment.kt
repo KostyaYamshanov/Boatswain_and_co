@@ -1,8 +1,6 @@
 package com.esoft.accounting.fragments.loginFragment
 
 import android.app.ProgressDialog
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -12,7 +10,7 @@ import com.esoft.accounting.databinding.FragmentLoginBinding
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.R
-import com.esoft.accounting.settings.MY_PREF
+import com.esoft.accounting.fragments.dialogFragments.ResetPasswordDialogFragment
 import com.esoft.accounting.settings.Settings
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -21,14 +19,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     lateinit var navController: NavController
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var resetPasswordDialog: ResetPasswordDialogFragment
     private lateinit var settings: Settings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(requireContext())).get(LoginViewModel::class.java)
 
         settings = Settings(this.requireContext())
+        resetPasswordDialog = ResetPasswordDialogFragment()
 
         progressDialog = ProgressDialog(this.context)
         progressDialog.setTitle("Подождите")
@@ -81,6 +81,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }else{
                 settings.saveMePref(false)
             }
+        }
+
+        loginBinding.textResetPassword.setOnClickListener {
+            fragmentManager?.let { it1 -> resetPasswordDialog.show(it1, "dialogResetPassword") }
         }
 
     }

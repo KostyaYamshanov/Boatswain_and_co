@@ -1,27 +1,43 @@
 package com.esoft.accounting.fragments.dialogFragments
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.DialogFragment
+import com.esoft.accounting.R
 import com.esoft.accounting.databinding.DialogCheckEmailBinding
 
-class EmailCheckFragment(): DialogFragment() {
+class EmailCheckFragment(val text: String): DialogFragment() {
 
-    private lateinit var viewBinding: DialogCheckEmailBinding
+    lateinit var checkEmailBinding: DialogCheckEmailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewBinding = DialogCheckEmailBinding.inflate(inflater, container, false)
+        checkEmailBinding = DialogCheckEmailBinding.inflate(inflater, container, false)
         onClick()
-        return viewBinding.root
+        checkEmailBinding.infoText.text = text
+        return checkEmailBinding.root
     }
 
 
-    fun onClick() {
-        viewBinding.btnDialogComplite.setOnClickListener {
+    private fun onClick() {
+        checkEmailBinding.okBtn.setOnClickListener {
             dismiss()
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog.window!!.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setContentView(R.layout.dialog_check_email);
+        return dialog
     }
 
 }

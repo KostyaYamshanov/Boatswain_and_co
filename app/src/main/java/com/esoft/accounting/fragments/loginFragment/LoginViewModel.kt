@@ -1,14 +1,15 @@
 package com.esoft.accounting.fragments.loginFragment
 
+import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.esoft.accounting.data.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
+class LoginViewModel(private val authRepository: AuthRepository) : ViewModel(){
 
-    private var authRepository: AuthRepository = AuthRepository(application)
     private var userLiveData = MutableLiveData<FirebaseUser>()
     private var taskLogin = MutableLiveData<Boolean>()
 
