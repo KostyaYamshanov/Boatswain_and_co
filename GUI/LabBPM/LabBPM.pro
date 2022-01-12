@@ -11,13 +11,19 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    icon.cpp
+    icon.cpp \
+    ghpainter.cpp
 
 HEADERS += \
     mainwindow.h \
     includes.h \
     defines.h \
-    icon.h
+    icon.h \
+    ghpainter.h \
+    ghtypedefs.h \
+    debtrace.h
+
+QMAKE_CXXFLAGS += -DDEBUG_MODE
 
 FORMS += \
     mainwindow.ui

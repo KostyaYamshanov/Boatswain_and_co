@@ -4,16 +4,15 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
-#include <QLabel>
-#include <QPushButton>
-#include <QWidget>
-#include <QVBoxLayout>
 #include <QMainWindow>
+#include <QDesktopWidget>
+#include <QWidget>
 #include <locale.h>
-#include <QIcon>
 #include <filesystem>
 #include <unistd.h>
 #include "defines.h"
 #include "icon.h"
+#include "ghpainter.h"
+#include "debtrace.h"
 
 #endif // GLOB_INC
