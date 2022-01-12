@@ -19,7 +19,11 @@ HEADERS += \
     includes.h \
     defines.h \
     icon.h \
-    ghpainter.h
+    ghpainter.h \
+    ghtypedefs.h \
+    debtrace.h
+
+QMAKE_CXXFLAGS += -DDEBUG_MODE
 
 FORMS += \
     mainwindow.ui

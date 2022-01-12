@@ -1,193 +1,232 @@
 #include "ghpainter.h"
 
-GreenHouse :: GreenHouse (QWidget *parent) : QWidget (parent)
+GreenHouse:: GreenHouse (QWidget *parent, int iWinWidth) : QWidget (parent)
 {
+	int iCnvrtdVal = 0;
+	TRACE_DBG_FILE_AND_LINE;
+	SetWinWidth (iWinWidth);
+	SetLength (GH_DEFAULT_LENGTH); //order matters, believe me
 	SetWidth (GH_DEFAULT_WIDTH);
-	SetLength (GH_DEFAULT_LENGTH);
- 	SetVertRampWidth (GH_DEFAULT_VRAMP_WIDTH);
-    SetVertRampType (GH_DEFAULT_VRAMP_TYPE);
-    SetVertRampSpacing (GH_DEFAULT_VRAMP_SPACING);
-    SetHorRampAmount (GH_DEFAULT_HRAMP_AMNT);
-    SetHorRampWidth (GH_DEFAULT_HRAMP_WIDTH);
-    SetHorRampSpacing (GH_DEFAULT_HRAMP_SPACING);
+	TRACE_DBG_FILE_AND_LINE;
+	SetVertRampSpacing (GH_DEFAULT_VRAMP_SPACING);
+	TRACE_DBG_FILE_AND_LINE;
+	SetHorRampSpacing (GH_DEFAULT_HRAMP_SPACING);
+	SetHorRampAmount (GH_DEFAULT_HRAMP_AMNT);
+	TRACE_DBG_FILE_AND_LINE;
+	SetVertRampAmount (GH_DEFAULT_VRAMP_AMNT);
+
+	for (int iIndex = 1; iIndex <= GH_DEFAULT_VRAMP_AMNT; iIndex++)
+	{
+		switch (iIndex)
+		{
+			case 1:
+				iCnvrtdVal =
+							(iWinWidth * GH_DEFAULT_VRAMP_LWIDTH) / RealValues.iLength;
+				break;
+
+			case GH_DEFAULT_VRAMP_AMNT:
+				iCnvrtdVal =
+							(iWinWidth * GH_DEFAULT_VRAMP_RWIDTH) / RealValues.iLength;
+				break;
+
+			default:
+				iCnvrtdVal =
+							(iWinWidth * GH_DEFAULT_VRAMP_WIDTH) / RealValues.iLength;
+
+				break;
+		}
+
+		vVRampWidth.push_back (iCnvrtdVal);
+	}
+
+	for (int iIndex = 1; iIndex <= GH_DEFAULT_HRAMP_AMNT; iIndex++)
+	{
+		if ((iIndex == 1) || iIndex == GH_DEFAULT_HRAMP_AMNT)
+		{
+			iCnvrtdVal =
+						(iWinWidth * GH_DEFAULT_HRAMP_BWIDTH) / RealValues.iLength;
+		}
+		else
+		{
+			iCnvrtdVal =
+						(iWinWidth * GH_DEFAULT_HRAMP_WIDTH) / RealValues.iLength;
+		}
+
+		vHRampWidth.push_back (iCnvrtdVal);
+	}
+	TRACE_DBG_FILE_AND_LINE;
+
 };
 
-void GreenHouse :: SetWidth (int iWidth)
+void GreenHouse:: SetWidth (int iWidth)
 {
-	iGHwidth = iWidth;
-	qDebug ("SetWidth %d\n", iGHwidth);
+	RealValues.iWidth = iWidth;
+	PxlValues.iWidth =
+				(iWinWidth * RealValues.iWidth) / RealValues.iLength;
 	return;
 };
 
-void GreenHouse :: SetLength (int iLength)
+void GreenHouse:: SetLength (int iLength)
 {
-	iGHLength = iLength;
-	qDebug ("SetLength %d\n", iGHLength);
+	RealValues.iLength = iLength;
+	// fuck u that's why
+	PxlValues.iLength =
+				(iWinWidth * RealValues.iLength) / RealValues.iLength;
 	return;
 };
 
-void GreenHouse :: SetVertRampWidth (int iWidth)
+void GreenHouse:: SetVertRampAmount (int iAmonut)
 {
-	iVRampWidth = iWidth;
-	qDebug ("SetVertRampWidth %d\n", iVRampWidth);
-	return;
-};
-
-void GreenHouse :: SetVertRampAmount (int iAmonut)
-{
-	int iVRampSpacing;
-
 	iVRampAmnt = iAmonut;
-
-	qDebug ("SetVertRampAmount %d\n", iVRampAmnt);
-	if ( iVRampAmnt == 1)
-	{
-		qDebug ("mid ramp \n");
-		// middle ramp, spacing is division of greenhouse width by 2
-		iVRampSpacing = iGHwidth / 2 - iVRampWidth / 2;
-		qDebug ("dividing width %d by 2 results in %d subtracting rampwidtn %d /2 results in %d\n", iGHwidth, iGHwidth / 2, iVRampWidth, iVRampSpacing);
-		SetVertRampSpacing (iVRampSpacing);
-	}
 	return;
 };
 
-void GreenHouse :: SetVertRampType (int iType)
+void GreenHouse:: SetVertRampSpacing (int iSpacing)
 {
-	iVRampType = iType;
-	qDebug ("SetVertRampType %d\n", iVRampType);
-
-	switch (iType)
-	{
-		case 1:
-			qDebug ("case 1\n");
-    		SetVertRampAmount (GH_DEFAULT_VRAMP_AMNT);
-			break;
-		default:
-			qDebug ("case 2\n");
-    		SetVertRampAmount (GH_DEFAULT_VRAMP_AMNT);
-			break;
-	}
+	RealValues.iVRampSpacing = iSpacing;
+	PxlValues.iVRampSpacing = 
+				(iWinWidth * RealValues.iVRampSpacing) / RealValues.iLength;
 	return;
 };
 
-void GreenHouse :: SetVertRampSpacing (int iSpacing)
+void GreenHouse:: SetHorRampAmount (int iAmonut)
 {
-	iVRampSpacing = iSpacing;
-	qDebug ("SetVertRampSpacing %d\n", iVRampSpacing);
-	return;
-};
-
-void GreenHouse :: SetHorRampAmount (int iAmonut)
-{
-	int iHRampSpacing;
-
 	iHRampAmnt = iAmonut;
-	qDebug ("SetHorRampAmount %d\n", iHRampAmnt);
-
-	if ( iHRampAmnt == 1)
-	{
-		// middle ramp, spacing is division of greenhouse width by 2
-		iHRampSpacing = iGHLength / 2 - iHRampWidth / 2;
-		SetHorRampSpacing (iHRampSpacing);
-	}
 	return;
 };
 
-void GreenHouse :: SetHorRampWidth (int iWidth)
+void GreenHouse:: SetHorRampSpacing (int iSpacing)
 {
-	iHRampWidth = iWidth;
-	qDebug ("SetHorRampWidth %d\n", iHRampWidth);
-	return;
-};
-
-void GreenHouse :: SetHorRampType (int iType)
-{
-	iHRampType = iType;
-
-	qDebug ("SetHorRampType %d\n", iHRampType);
-	switch (iType)
-	{
-		case 1:
-    		SetHorRampAmount (GH_DEFAULT_HRAMP_AMNT);
-			break;
-		default:
-    		SetHorRampAmount (GH_DEFAULT_HRAMP_AMNT);
-			break;
-	}
-	return;
-};
-
-void GreenHouse :: SetHorRampSpacing (int iSpacing)
-{
-	iHRampSpacing = iSpacing;
-	qDebug ("SetHorRampSpacing %d\n", iHRampSpacing);
+	RealValues.iHRampSpacing = iSpacing;
+	PxlValues.iHRampSpacing = 
+				(iWinWidth * RealValues.iHRampSpacing) / RealValues.iLength;
 	return;
 };
 
 
-void GreenHouse :: paintEvent (QPaintEvent *event)
+void GreenHouse:: paintEvent (QPaintEvent *event)
 {
-    Q_UNUSED(event);
+	Q_UNUSED(event);
 
-    QPainter Painter (this);
+	QPainter Painter (this);
 
 	QPen Pen(Qt::black, 2, Qt::SolidLine);
-   
-    Painter.setPen (Pen);
 
-    PrintBorders (&Painter);
-    PrintVRamp (&Painter);
-    PrintHRamp (&Painter);
+	Painter.setPen (Pen);
+	Painter.setBrush (QBrush (Qt::white));
 
-    return;
+	PrintBorders (&Painter);
+	PrintVRamp (&Painter);
+	PrintHRamp (&Painter);
+
+	return;
 }
 
-void GreenHouse :: PrintBorders (QPainter *pPainter)
+void GreenHouse:: PrintBorders (QPainter *pPainter)
 {
 	pPainter->drawRect (GH_INITIAL_X_POS, GH_INITIAL_Y_POS,
-					    iGHwidth, iGHLength);
+					    PxlValues.iLength, PxlValues.iWidth);
+
 	return;
 }
 
-void GreenHouse :: PrintVRamp (QPainter *pPainter)
+void GreenHouse:: PrintVRamp (QPainter *pPainter)
 {
-	int iLeftPos, iRightPos;
-	int iHalfWidth;
+	int iLeftPos;
 
-	iHalfWidth = iVRampWidth / 2;
+	QPen Pen(Qt::gray, 2, Qt::SolidLine);
+
+	pPainter->setPen (Pen);
+	pPainter->setBrush(QBrush(Qt::gray));
 
 	iLeftPos = GH_INITIAL_X_POS;
-	iRightPos = iLeftPos + iHalfWidth;
 
-	for (int iRampCounter = 0; iRampCounter < iVRampAmnt; iRampCounter++)
+	if (!IsReflected ())
 	{
-		iLeftPos += iVRampSpacing;
-		iRightPos = iLeftPos + iHalfWidth;
-		pPainter->drawLine (iLeftPos, GH_INITIAL_Y_POS,
-				  iLeftPos, iGHLength + GH_INITIAL_Y_POS);	
-		pPainter->drawLine (iRightPos, GH_INITIAL_Y_POS,
-				  iRightPos, iGHLength + GH_INITIAL_Y_POS);	
+		for (int iRampCounter = 0; iRampCounter < iVRampAmnt; iRampCounter++)
+		{
+			// drawrect (Xcoord,Ycoord, width, height)
+			pPainter->drawRect (iLeftPos, GH_INITIAL_Y_POS,
+					  			vVRampWidth[iRampCounter],
+					  			PxlValues.iWidth);
+			iLeftPos += (vVRampWidth[iRampCounter] + PxlValues.iVRampSpacing);
+		}
 	}
+	else
+	{
+		for (int iRampCounter = iVRampAmnt - 1; iRampCounter >= 0; iRampCounter--)
+		{
+			// drawrect (Xcoord,Ycoord, width, height)
+			pPainter->drawRect (iLeftPos, GH_INITIAL_Y_POS,
+					  			vVRampWidth[iRampCounter],
+					  			PxlValues.iWidth);
+			iLeftPos += (vVRampWidth[iRampCounter] + PxlValues.iVRampSpacing);
+		}
+	}
+
+	pPainter->setBrush(QBrush(Qt::white));
+	Pen.setColor (Qt::black);
+	pPainter->setPen (Pen);
+
 	return;
 }
 
-void GreenHouse :: PrintHRamp (QPainter *pPainter)
+void GreenHouse:: PrintHRamp (QPainter *pPainter)
 {
-	int iTopPos, iBotPos;
-	int iHalfWidth;
+	int iTopPos;
+	QPen Pen(Qt::gray, 2, Qt::SolidLine);
 
-	iHalfWidth = iHRampWidth / 2;
-	iTopPos = GH_INITIAL_X_POS;
+	pPainter->setPen (Pen);
+	pPainter->setBrush(QBrush(Qt::gray));
 
-	for (int iRampCounter = 0; iRampCounter < iVRampAmnt; iRampCounter++)
+	iTopPos = GH_INITIAL_Y_POS;
+	if (!IsReflected ())
 	{
-		iTopPos += iHRampSpacing;
-		iBotPos = iTopPos + iHalfWidth;
-		pPainter->drawLine (GH_INITIAL_X_POS, iTopPos,
-				  iGHwidth + GH_INITIAL_X_POS, iTopPos);	
-		pPainter->drawLine (GH_INITIAL_X_POS, iBotPos,
-				  iGHwidth + GH_INITIAL_X_POS, iBotPos);	
+		for (int iRampCounter = 0; iRampCounter < iHRampAmnt; iRampCounter++)
+		{
+			pPainter->drawRect (GH_INITIAL_X_POS, iTopPos,
+					  			PxlValues.iLength, vHRampWidth[iRampCounter]);
+			iTopPos += (vHRampWidth[iRampCounter] + PxlValues.iHRampSpacing);
+		}
+	}
+	else
+	{
+		for (int iRampCounter = iHRampAmnt - 1; iRampCounter >= 0; iRampCounter--)
+		{
+			pPainter->drawRect (GH_INITIAL_X_POS, iTopPos,
+					  			PxlValues.iLength, vHRampWidth[iRampCounter]);
+			iTopPos += (vHRampWidth[iRampCounter] + PxlValues.iHRampSpacing);
+		}
 	}
 
+	pPainter->setBrush(QBrush(Qt::white));
+	Pen.setColor (Qt::black);
+	pPainter->setPen (Pen);
+
 	return;
+}
+
+void GreenHouse:: SetReflection (bool bValue)
+{
+	bReflected = bValue;
+}
+
+bool GreenHouse:: IsReflected (void)
+{
+	return bReflected;
+}
+
+void GreenHouse::SetWinWidth (int iWidth)
+{
+	iWinWidth = iWidth;
+
+	//iWinWidth stands for maximum available length
+	//My idea:
+	//	we have length of greenhouse in centimeters
+	//	(4800) by real size and we have win width in pixels
+	//	we use 75% of available width to print length,
+	//	so we put 4800 as iWinWidth and then calculate all the rest
+	//	of values according to it
+	// It's simple proportion
+	//	X = (iWinWidth * Value) / iRealLength
 }
