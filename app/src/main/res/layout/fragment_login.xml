@@ -85,7 +85,7 @@
         app:boxBackgroundColor="@color/white"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/linearSaveMe"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:startIconDrawable="@drawable/ic_lock_black_24dp">
@@ -135,28 +135,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart" />
-
-    <LinearLayout
-        android:id="@+id/linearSaveMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
-        app:layout_constraintStart_toStartOf="@+id/guidelineStart">
-
-        <CheckBox
-            android:id="@+id/saveLoginAc"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
-
-        <TextView
-            style="@style/HintText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/save_me" />
-
-    </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
