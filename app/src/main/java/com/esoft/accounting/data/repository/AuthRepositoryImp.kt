@@ -7,17 +7,26 @@ import com.google.firebase.auth.FirebaseUser
 
 class AuthRepositoryImp(private val authRepositoryDataSource: AuthRepositoryDataSource): AuthRepository {
 
-    override fun login(email: String, password: String)  = authRepositoryDataSource.login(email = email, password = password)
+    override fun login(email: String, password: String)  =
+        authRepositoryDataSource.login(email = email, password = password)
 
-    override fun registration(email: String, password: String) = authRepositoryDataSource.registration(email = email, password = password)
+    override fun registration(email: String, password: String, name: String, female: String) =
+        authRepositoryDataSource.registration(email = email, password = password, name = name, female = female)
 
-    override fun resetPassword(email: String) = authRepositoryDataSource.resetPassword(email = email)
+    override fun resetPassword(email: String) =
+        authRepositoryDataSource.resetPassword(email = email)
 
-    override fun logOut()  = authRepositoryDataSource.logOut()
+    override fun logOut()  =
+        authRepositoryDataSource.logOut()
 
-    override fun getUserLiveData(): MutableLiveData<FirebaseUser>  = authRepositoryDataSource.getUserLiveData()
+    override fun getUserLiveData(): MutableLiveData<FirebaseUser>  =
+        authRepositoryDataSource.getUserLiveData()
 
-    override fun userTask(): MutableLiveData<Boolean> = authRepositoryDataSource.userTask()
+    override fun userTask(): MutableLiveData<Boolean> =
+        authRepositoryDataSource.userTask()
+
+    override fun getLoggedOutLiveData(): MutableLiveData<Boolean> =
+        authRepositoryDataSource.getLoggedOutLiveData()
 
 
 }

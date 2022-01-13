@@ -3,16 +3,18 @@ package com.esoft.accounting.data
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.esoft.accounting.domain.repository.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 
 interface AuthRepositoryDataSource {
 
     fun login(email: String, password: String)
 
-    fun registration(email: String, password: String)
+    fun registration(email: String, password: String, name: String, female: String)
 
     fun resetPassword(email: String)
 
@@ -22,11 +24,14 @@ interface AuthRepositoryDataSource {
 
     fun userTask(): MutableLiveData<Boolean>
 
+    fun getLoggedOutLiveData(): MutableLiveData<Boolean>
+
 }
 
 class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
 
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseDataBase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val userLiveData = MutableLiveData<FirebaseUser>()
     private val loggedOutLiveData = MutableLiveData<Boolean>()
     private val userTask = MutableLiveData<Boolean>()
@@ -48,6 +53,7 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
                     userLiveData.postValue(user)
                     if (user!!.isEmailVerified) {
                         userTask.postValue(true)
+                        loggedOutLiveData.postValue(false)
                     } else {
                         Log.d("AuthRepository", "fun login: Пользователь не подтвердил почту")
                     }
@@ -63,13 +69,18 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
     }
 
     @SuppressLint("NewApi")
-    override fun registration(email: String, password: String) {
+    override fun registration(email: String, password: String, name: String, female: String) {
         firebaseAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = firebaseAuth.currentUser
                     userLiveData.postValue(user)
+                    val userR = User(
+                        name = name,
+                        female = female
+                    )
+                    firebaseDataBase.getReference("Users").child(user!!.uid).setValue(userR)
                     user!!.sendEmailVerification()
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
@@ -99,11 +110,15 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
 
     override fun logOut() {
         firebaseAuth.signOut()
-        loggedOutLiveData!!.postValue(true)
+        loggedOutLiveData.postValue(true)
     }
 
     override fun userTask(): MutableLiveData<Boolean> {
         return userTask
+    }
+
+    override fun getLoggedOutLiveData(): MutableLiveData<Boolean> {
+        return loggedOutLiveData
     }
 
     override fun getUserLiveData(): MutableLiveData<FirebaseUser> {

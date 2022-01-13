@@ -14,8 +14,8 @@ class RegisterViewModel(
 
     private val taskRegister = getTaskUserLiveDataUseCase.getTaskLiveData()
 
-    fun register(email: String, password: String) {
-        registerByEmailUseCase.register(email = email, password = password)
+    fun register(email: String, password: String, name: String, female: String) {
+        registerByEmailUseCase.register(email = email, password = password, name = name, female = female)
     }
 
     fun getTaskLiveData(): LiveData<Boolean> {

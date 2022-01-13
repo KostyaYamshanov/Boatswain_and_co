@@ -40,11 +40,11 @@ class ResetPasswordDialogFragment : DialogFragment() {
             viewModel.resetPassword(email = email)
             viewModel.getTaskLiveData().observe(this, {
                 if (!it) {
-                    bindingReset.textField1.error = getString(R.string.failed_email)
+                    bindingReset.textFieldEmail.error = getString(R.string.failed_email)
                     bindingReset.resetLayout.visibility = View.VISIBLE
                     bindingReset.resetMsgSendLayout.visibility = View.GONE
                 }else{
-                    bindingReset.textField1.error = null
+                    bindingReset.textFieldEmail.error = null
                     bindingReset.resetLayout.visibility = View.GONE
                     bindingReset.resetMsgSendLayout.visibility = View.VISIBLE
 
@@ -54,13 +54,13 @@ class ResetPasswordDialogFragment : DialogFragment() {
 
         bindingReset.cancel.setOnClickListener {
             dismiss()
-            bindingReset.textField1.error = null
+            bindingReset.textFieldEmail.error = null
             bindingReset.textLoginReset.text = null
         }
 
         bindingReset.sendOk.setOnClickListener {
             dismiss()
-            bindingReset.textField1.error = null
+            bindingReset.textFieldEmail.error = null
             bindingReset.textLoginReset.text = null
         }
     }

@@ -41,16 +41,18 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         registerBinding.buttonRegister.setOnClickListener {
             val email = registerBinding.textLoginInput.text.toString()
             val password = registerBinding.textPasswordInput.text.toString()
+            val name = registerBinding.textNameInput.text.toString()
+            val female = registerBinding.textFemaleInput.text.toString()
+            checkFields(email = email, name = name, female = female, password = password)
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.register(email = email, password = password)
+            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && female.isNotEmpty()) {
+                viewModel.register(email = email, password = password, name = name, female = female)
                 progressDialog.show()
                 viewModel.getTaskLiveData().observe(viewLifecycleOwner,
                     {
                         if (it) {
-                            progressDialog.dismiss()
                             fragmentManager?.let { it1 -> dialogEmailCheck.show(it1, "dialogEmailCheck") }
-                            activity?.onBackPressed()
+                            navController.navigateUp()
                         }
                         progressDialog.dismiss()
                     })
@@ -60,8 +62,60 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
 
         registerBinding.backArrow.setOnClickListener {
-            activity?.onBackPressed()
+            navController.navigateUp()
         }
+    }
+
+    private fun checkFields(email: String, name: String, female: String, password: String) {
+        if(email.isEmpty()) {
+            registerBinding.textFieldEmail.apply {
+                error = "Введите почту"
+                requestFocus()
+            }
+            return
+        }else {
+            registerBinding.textFieldEmail.error = null
+        }
+
+        if(name.isEmpty()) {
+            registerBinding.textFieldName.apply {
+                error = "Введите имя"
+                requestFocus()
+            }
+            return
+        }else {
+            registerBinding.textFieldName.error = null
+        }
+        if(female.isEmpty()) {
+            registerBinding.textFieldFemale.apply {
+                error = "Введите фамилию"
+                requestFocus()
+            }
+            return
+        }else {
+            registerBinding.textFieldFemale.error = null
+
+        }
+
+        if(password.isEmpty()) {
+            registerBinding.textFieldPassword.apply {
+                error = "Введите пароль"
+                requestFocus()
+            }
+            return
+        }else {
+            registerBinding.textFieldPassword.error = null
+        }
+        if(password.length < 6) {
+            registerBinding.textFieldPassword.apply {
+                error = "Пароль должен быть 6 символов"
+                requestFocus()
+            }
+            return
+        }else {
+            registerBinding.textFieldPassword.error = null
+        }
+
     }
 
 }
