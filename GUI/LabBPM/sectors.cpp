@@ -62,13 +62,11 @@ void SectorWidget::paintEvent (QPaintEvent *event)
 
 	QPainter Painter (this);
 
-	qDebug ("inside paint event");
 	QPen Pen(Qt::green, 2, Qt::SolidLine);
 
 	Painter.setPen (Pen);
 	Painter.setBrush (QBrush (Qt::green));
-	this->setGeometry (QRect(oSector.LeftX (), oSector.TopY (), oSector.Width (), oSector.Height ()));
-	qDebug ("painting sector x:%d, y:%d, width:%d, height:%d", oSector.LeftX (), oSector.TopY (), oSector.Width (), oSector.Height ());
+	// qDebug ("painting sector x:%d, y:%d, width:%d, height:%d", oSector.LeftX (), oSector.TopY (), oSector.Width (), oSector.Height ());
 	Painter.drawRect (oSector.LeftX (), oSector.TopY (),
 				      oSector.Width (), oSector.Height ());
 
@@ -78,6 +76,7 @@ void SectorWidget::paintEvent (QPaintEvent *event)
 void SectorWidget:: SetSector (std:: vector <Sector> *pVector, int iIndex)
 {
 	oSector = pVector->at(iIndex);
+	this->repaint ();
 }
 
 int Sector:: Width (void)

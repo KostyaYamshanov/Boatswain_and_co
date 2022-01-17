@@ -48,10 +48,18 @@ void MainWindow::SetUpGreenHouse (void)
 
     CalculateSectors ();
     //Drawing sectors, huge, long and awful implementation
-    qDebug ("straight sectors amount %d", pvSectors->size());
     ui->Sector_1->SetSector (pvSectors, 0);
+    Sector TmpSector;
+    for (int i = 0; i < pvSectors->size(); i++)
+    {
+        TmpSector = pvSectors->at (i);
+        qDebug ("sector %d, LeftX %d, RightX %d, topY %d, botY %d",i, TmpSector.LeftX (),
+            TmpSector.RightX (), TmpSector.TopY (), TmpSector.BotY ());
+    }
 
-    qDebug ("reflected sectors amount %d", pvReflectedSectors->size());
+    ui->Sector_1->setGeometry (QRect(0, 0 ,
+                                     TmpSector.Width () + ui->SectionOne->GetVRampWidth(0),
+                                     TmpSector.Height () - ui->SectionOne->GetHRampWidth(0)));
     this->resize (Screen.width (), Screen.height ());
     this->repaint ();
 }
@@ -90,22 +98,17 @@ void MainWindow::HandleSectors (int XLeft, int XRight,
     //same logic is for horizontal ramp but for Y coordinates
     Sector TmpSector;
     int iSectorsAmnt;
-    int iCustomCoordinateX;
-    int iCustomCoordinateY;
 
+    qDebug("input %d %d %d %d", XLeft, XRight, Ytop, YBot);
     if (bReflected)
     {
         iSectorsAmnt = iReflectedSectorsAmount;
-        iCustomCoordinateX = ui->SectionOne->GetHeight ();
-        iCustomCoordinateY = ui->SectionOne->GetWidth ();
     }
     else
     {
         iSectorsAmnt = iSectorsAmount;
-        iCustomCoordinateX = ui->SectionTwo->GetHeight ();
-        iCustomCoordinateY = ui->SectionTwo->GetWidth ();
     }
-    qDebug ("sectors amnt %d", iSectorsAmnt);
+
     for (int iIndex = 0; iIndex < iSectorsAmnt; iIndex++)
     {
         if (bReflected)
@@ -120,19 +123,52 @@ void MainWindow::HandleSectors (int XLeft, int XRight,
         {
             if (XLeft == TmpSector.LeftX ())
             {
-                TmpSector.LeftX (XLeft);
+                if (!bReflected)
+                {
+                    TmpSector.LeftX (XLeft + ui->SectionOne->GetVRampWidth(iIndex));
+                    pvSectors->at (iIndex) = TmpSector;
+                }
+                else
+                {
+                    TmpSector.LeftX (XLeft + ui->SectionTwo->GetVRampWidth(iIndex));
+                    pvReflectedSectors->at (iIndex) = TmpSector;
+                }
                 continue;
             }
+            if (XRight == TmpSector.RightX ())
+            {
+                if (!bReflected)
+                {
+                    TmpSector.RightX (TmpSector.RightX () - ui->SectionOne->GetVRampWidth(iIndex));
+                    pvSectors->at (iIndex) = TmpSector;
+                }
+                else
+                {
+                    TmpSector.RightX (TmpSector.RightX () - ui->SectionTwo->GetVRampWidth(iIndex));
+                    pvReflectedSectors->at (iIndex) = TmpSector;
+                }
+                continue;
+            }
+            // qDebug ("comparing %d with range %d, %d", XLeft, TmpSector.LeftX (), TmpSector.RightX ());
             if (XLeft > TmpSector.LeftX () &&
-                XLeft <= TmpSector.RightX ())
+                XLeft < TmpSector.RightX ())
             {
                 // we are inside existing sector
                 //update right border of existing sector
-                TmpSector.RightX (XLeft);
                 //create new sector, inherit Y coordinates from collision sector
                 Sector NewSector;
                 NewSector.LeftX (XRight);
-                NewSector.RightX (iCustomCoordinateX);
+                // qDebug ("new left x%d", NewSector.LeftX ());
+                NewSector.RightX (TmpSector.RightX ());
+                TmpSector.RightX (XLeft);
+                if (bReflected)
+                {
+                    pvReflectedSectors->at (iIndex) = TmpSector;
+                }
+                else
+                {
+                    pvSectors->at (iIndex) = TmpSector;
+                }
                 NewSector.TopY (TmpSector.TopY ());
                 NewSector.BotY (TmpSector.BotY ());
                 if (!bReflected)
@@ -145,42 +181,74 @@ void MainWindow::HandleSectors (int XLeft, int XRight,
                     pvReflectedSectors->push_back (NewSector);
                     iReflectedSectorsAmount++;
                 }
-                qDebug ("created new sector X:%d, x:%d, Y:%d, y:%d",
-                        NewSector.LeftX (), NewSector.RightX (),NewSector.TopY (), NewSector.BotY ());
+                 qDebug ("created new sector X:%d, x:%d, Y:%d, y:%d",
+                         NewSector.LeftX (), NewSector.RightX (),NewSector.TopY (), NewSector.BotY ());
             }
         }
         else
         {
             if (Ytop == TmpSector.TopY ())
             {
-                TmpSector.TopY (Ytop);
+                if (!bReflected)
+                {
+                    TmpSector.TopY (Ytop + ui->SectionOne->GetHRampWidth(iIndex));
+                    pvSectors->at (iIndex) = TmpSector;
+                    qDebug ("updated sector X:%d, x:%d, Y:%d, y:%d",
+                             TmpSector.LeftX (), TmpSector.RightX (),TmpSector.TopY (), TmpSector.BotY ());
+                    // qDebug ("set new top coord %d that is result of %d + %d", TmpSector.TopY (), Ytop, ui->SectionOne->GetHRampWidth(iIndex));
+                }
+                else
+                {
+                    TmpSector.TopY (Ytop + ui->SectionOne->GetHRampWidth(iIndex));
+                    pvReflectedSectors->at (iIndex) = TmpSector;
+                }
                 continue;
             }
+            if (YBot == TmpSector.BotY ())
+            {
+                if (!bReflected)
+                {
+                    TmpSector.BotY (TmpSector.BotY () - ui->SectionOne->GetHRampWidth(iIndex));
+                    pvSectors->at (iIndex) = TmpSector;
+                    qDebug ("updated sector X:%d, x:%d, Y:%d, y:%d",
+                             TmpSector.LeftX (), TmpSector.RightX (),TmpSector.TopY (), TmpSector.BotY ());
+
+                    // qDebug ("set new top coord %d that is result of %d + %d", TmpSector.TopY (), Ytop, ui->SectionOne->GetHRampWidth(iIndex));
+                }
+                else
+                {
+                    TmpSector.BotY (TmpSector.BotY () - ui->SectionTwo->GetHRampWidth(iIndex));
+                    pvReflectedSectors->at (iIndex) = TmpSector;
+                }
+                continue;
+            }
+            // qDebug ("comparing hor %d in range %d %d",  Ytop, TmpSector.TopY (),TmpSector.BotY ());
             if (Ytop > TmpSector.TopY () &&
-                Ytop <= TmpSector.BotY ())
+                Ytop < TmpSector.BotY ())
             {
                 // we are inside existing sector
                 //update bottom border of existing sector
-                TmpSector.BotY (XLeft);
                 //create new sector, inherit Y coordinates from collision sector
                 Sector NewSector;
                 NewSector.LeftX (TmpSector.LeftX());
                 NewSector.RightX (TmpSector.RightX());
                 NewSector.TopY (YBot);
-                NewSector.BotY (iCustomCoordinateY);
-
+                NewSector.BotY (TmpSector.BotY ());
+                TmpSector.BotY (Ytop);
                 if (!bReflected)
                 {
+                    pvSectors->at (iIndex) = TmpSector;
                     pvSectors->push_back (NewSector);
                     iSectorsAmount++;
                 }
                 else
                 {
+                    pvReflectedSectors->at (iIndex) = TmpSector;
                     pvReflectedSectors->push_back (NewSector);
                     iReflectedSectorsAmount++;
                 }
-                qDebug ("created new sector X:%d, x:%d, Y:%d, y:%d",
-                        NewSector.LeftX (), NewSector.RightX (),NewSector.TopY (), NewSector.BotY ());
+                 qDebug ("created new sector X:%d, x:%d, Y:%d, y:%d",
+                         NewSector.LeftX (), NewSector.RightX (),NewSector.TopY (), NewSector.BotY ());
             }
 
         }
@@ -196,13 +264,13 @@ void MainWindow:: CalculateSectors (void)
     iLeftPos = GH_INITIAL_X_POS;
 
     iVertRamps = ui->SectionOne->GetVertRampAmnt ();
-    qDebug ("vert ramp amount %d", iVertRamps);
+    // qDebug ("vert ramp amount %d", iVertRamps);
     for (int iRampCounter = 0; iRampCounter <
             iVertRamps; iRampCounter++)
     {
-        qDebug ("sector calculator vertical iteration %d", iRampCounter);
-        HandleSectors (iLeftPos, GH_INITIAL_Y_POS,
-                        iLeftPos + ui->SectionOne->GetVRampWidth(iRampCounter),
+        // qDebug ("sector calculator vertical iteration %d", iRampCounter);
+        HandleSectors (iLeftPos, iLeftPos + ui->SectionOne->GetVRampWidth(iRampCounter),
+                        GH_INITIAL_Y_POS,
                         GH_INITIAL_Y_POS + ui->SectionOne->GetHeight (),
                         true, false);
 
@@ -216,9 +284,10 @@ void MainWindow:: CalculateSectors (void)
     for (int iRampCounter = 0; iRampCounter <
          ui->SectionOne->GetHorRampAmnt (); iRampCounter++)
     {
-        qDebug ("sector calculator horizontal iteration %d", iRampCounter);
-        HandleSectors (GH_INITIAL_X_POS, iTopPos,
+        // qDebug ("sector calculator horizontal iteration %d", iRampCounter);
+        HandleSectors (GH_INITIAL_X_POS,
                         GH_INITIAL_X_POS + ui->SectionOne->GetWidth (),
+                        iTopPos,
                         iTopPos + ui->SectionOne->GetHRampWidth(iRampCounter),
                         false, false);
         iTopPos += (ui->SectionOne->GetHRampWidth(iRampCounter) +
