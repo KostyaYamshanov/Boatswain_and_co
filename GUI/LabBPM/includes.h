@@ -14,5 +14,8 @@
 #include "icon.h"
 #include "ghpainter.h"
 #include "debtrace.h"
+#include "sectors.h"
+#include "getpath.h"
+#include "mainwindow.h"
 
 #endif // GLOB_INC

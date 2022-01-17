@@ -6,25 +6,13 @@
 #include <QPen>
 #include <QWidget>
 #include <QBrush>
+#include <QPixmap>
 #include "debtrace.h"
 #include "ghtypedefs.h"
 
-// general purpose default values in centimeters
-#define GH_DEFAULT_WIDTH 				1000
-#define GH_DEFAULT_LENGTH 				4800
-#define GH_DEFAULT_VRAMP_WIDTH 			60
-#define GH_DEFAULT_VRAMP_LWIDTH 		80
-#define GH_DEFAULT_VRAMP_RWIDTH 		100
-#define GH_DEFAULT_VRAMP_AMNT 			4
-#define GH_DEFAULT_VRAMP_SPACING 		1500
-#define GH_DEFAULT_HRAMP_AMNT 			5
-#define GH_DEFAULT_HRAMP_WIDTH 			75
-#define GH_DEFAULT_HRAMP_BWIDTH 		50
-#define GH_DEFAULT_HRAMP_SPACING 		170
-
 // values in pixels
-#define GH_INITIAL_X_POS 				10
-#define GH_INITIAL_Y_POS 				10
+#define GH_INITIAL_X_POS 				5
+#define GH_INITIAL_Y_POS 				5
 
 class GreenHouse : public QWidget
 {
@@ -55,9 +43,16 @@ public:
 	void SetHorRampSpacing (int iSpacing);
 	void SetReflection (bool bValue);
 	void SetWinWidth (int iWidth);
-
+	int GetHeight (void);
+	int GetWidth (void);
+	int GetVertRampAmnt (void);
+	int GetHorRampAmnt (void);
+	int GetVRampWidth (int iIndex);
+	int GetHRampWidth (int iIndex);
+	int GetVRampSpacing (void);
+	int GetHRampSpacing (void);
 protected:
-	void paintEvent(QPaintEvent *event);
+	void paintEvent (QPaintEvent *event);
 	void PrintBorders (QPainter *painter);
 	void PrintVRamp (QPainter *painter);
 	void PrintHRamp (QPainter *painter);

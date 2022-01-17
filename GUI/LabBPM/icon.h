@@ -1,16 +1,12 @@
 #pragma once
 
 #include <QMainWindow>
-#include <filesystem>
-#include <unistd.h>
 #include <QIcon>
+#include "getpath.h"
 
-// Path related macros
-#define PATH_SPLIT_TOKEN "GUI"
-#define PATH_ADD_TOKEN "LabBPM"
-#define POTATO_PIC_NAME "potato.png"
+#define POTATO_PIC_NAME     "potato.png"
 
-class Icon 
+class Icon
 {
 public:
     void SetIcon (QMainWindow *pWindow);
