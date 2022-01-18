@@ -7,7 +7,7 @@ interface AuthRepository {
 
     fun login(email: String, password: String)
 
-    fun registration(email: String, password: String, name: String, female: String)
+    fun registration(email: String, password: String, name: String, surname: String)
 
     fun resetPassword(email: String)
 

@@ -32,7 +32,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         loginViewModel = ViewModelProvider(
             this,
             LoginViewModelFactory(application = requireActivity().application)
@@ -57,6 +56,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLoginBinding.bind(view)
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
         binding.buttonRegister.setOnClickListener {
             navController!!.navigate(R.id.action_loginFragment_to_registerFragment)

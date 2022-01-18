@@ -14,7 +14,7 @@ interface AuthRepositoryDataSource {
 
     fun login(email: String, password: String)
 
-    fun registration(email: String, password: String, name: String, female: String)
+    fun registration(email: String, password: String, name: String, surname: String)
 
     fun resetPassword(email: String)
 
@@ -50,7 +50,7 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = firebaseAuth.currentUser
-                    userLiveData.postValue(user)
+                    userLiveData.postValue(user!!)
                     if (user!!.isEmailVerified) {
                         userTask.postValue(true)
                         loggedOutLiveData.postValue(false)
@@ -69,16 +69,16 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
     }
 
     @SuppressLint("NewApi")
-    override fun registration(email: String, password: String, name: String, female: String) {
+    override fun registration(email: String, password: String, name: String, surname: String) {
         firebaseAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = firebaseAuth.currentUser
-                    userLiveData.postValue(user)
+                    userLiveData.postValue(user!!)
                     val userR = User(
                         name = name,
-                        female = female
+                        surname = surname
                     )
                     firebaseDataBase.getReference("Users").child(user!!.uid).setValue(userR)
                     user!!.sendEmailVerification()

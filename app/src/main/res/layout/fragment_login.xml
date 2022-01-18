@@ -56,11 +56,11 @@
         android:id="@+id/textFieldEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:hint="@string/email_text"
         android:visibility="visible"
         app:boxBackgroundColor="@color/white"
         app:errorEnabled="true"
+        style="@style/Widget.Design.TextInputLayout"
         app:layout_constraintBottom_toTopOf="@+id/textFieldPassword"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -84,6 +84,7 @@
         android:visibility="visible"
         app:boxBackgroundColor="@color/white"
         app:endIconMode="password_toggle"
+        style="@style/Widget.Design.TextInputLayout"
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -101,8 +102,8 @@
 
     <Button
         android:id="@+id/buttonRegister"
-        style="@style/LoginButtonStyle"
         android:layout_width="0dp"
+        style="@style/Widget.AppCompat.Button"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="@string/register_text"
@@ -112,9 +113,9 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        style="@style/LoginButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button"
         android:text="@string/login_text"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -132,6 +133,7 @@
         android:linksClickable="true"
         android:text="@string/restore_password"
         android:textColor="@color/black"
+        style="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart" />

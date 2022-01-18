@@ -10,8 +10,8 @@ class AuthRepositoryImp(private val authRepositoryDataSource: AuthRepositoryData
     override fun login(email: String, password: String)  =
         authRepositoryDataSource.login(email = email, password = password)
 
-    override fun registration(email: String, password: String, name: String, female: String) =
-        authRepositoryDataSource.registration(email = email, password = password, name = name, female = female)
+    override fun registration(email: String, password: String, name: String, surname: String) =
+        authRepositoryDataSource.registration(email = email, password = password, name = name, surname = surname)
 
     override fun resetPassword(email: String) =
         authRepositoryDataSource.resetPassword(email = email)

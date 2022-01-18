@@ -6,32 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".presentation.registerFragment.RegisterFragment">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/registerToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/backArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_arrow_back_black_24dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Создать аккаунт"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="50dp"/>
-
-    </Toolbar>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -69,6 +51,7 @@
         android:layout_marginTop="50dp"
         app:endIconMode="custom"
         app:errorEnabled="true"
+        style="@style/Widget.Design.TextInputLayout"
         app:endIconDrawable="@drawable/ic_email_black_24dp"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -91,8 +74,8 @@
         app:boxBackgroundColor="@color/white"
         app:endIconDrawable="@drawable/ic_person_black_24dp"
         app:endIconMode="custom"
-        android:layout_marginTop="15dp"
         app:errorEnabled="true"
+        style="@style/Widget.Design.TextInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@+id/textFieldEmail">
@@ -113,8 +96,8 @@
         app:boxBackgroundColor="@color/white"
         app:endIconDrawable="@drawable/ic_person_black_24dp"
         app:endIconMode="custom"
-        android:layout_marginTop="15dp"
         app:errorEnabled="true"
+        style="@style/Widget.Design.TextInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@+id/textFieldName">
@@ -135,8 +118,8 @@
         app:boxBackgroundColor="@color/white"
         app:endIconDrawable="@drawable/ic_lock_black_24dp"
         app:endIconMode="custom"
-        android:layout_marginTop="15dp"
         app:errorEnabled="true"
+        style="@style/Widget.Design.TextInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@+id/textFieldFemale">
@@ -151,7 +134,7 @@
 
     <Button
         android:id="@+id/buttonRegister"
-        style="@style/LoginButtonStyle"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/register"
@@ -162,7 +145,7 @@
 
     <Button
         android:id="@+id/buttonLoginGoogle"
-        style="@style/LoginButtonStyle"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/login_google"

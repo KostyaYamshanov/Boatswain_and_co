@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.FragmentListBinding
 
@@ -47,6 +48,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         super.onResume()
         viewModel!!.getLoggedOutLiveData().observe(viewLifecycleOwner, {
             if (it) {
+                findNavController().popBackStack()
             }
         })
     }
