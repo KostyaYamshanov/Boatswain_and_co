@@ -6,22 +6,34 @@
     <string name="login_text">Войти</string>
     <string name="restore_password">Забыли пароль? Восстановить</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Name">Имя</string>
     <string name="female">Фамилия</string>
     <string name="login_google">Войти с помощью Google</string>
     <string name="register">Зарегистрироваться</string>
-    <string name="verification">Спасибо что зарегестрировались в приложении! На вашу почту выслали ссылку на подтверждение аккаунта. После подтверждения вы можете пользоваться своей учетной записью.</string>
+    <string name="verification">
+        Спасибо что зарегестрировались в приложении!
+        На вашу почту выслали ссылку на подтверждение аккаунта.
+        После подтверждения вы можете пользоваться своей учетной записью.
+    </string>
     <string name="complite">Готово</string>
-    <string name="save_me">Запомнить меня</string>
-
     <string name="textResetPassword">Забыли пароль?</string>
-
-    <string name="textResetInfo">Введите ваш email ниже. На этот \nemail будет отправлена ссылка для \nвосстановления пароля</string>
-    <string name="textResetEmailSend">Ссылка на сброс пароля отправлена на ваш почтовый ящик</string>
-
+    <string name="textResetInfo">
+        Введите ваш email ниже.
+        На этот \nemail будет отправлена ссылка для \nвосстановления пароля
+    </string>
+    <string name="textResetEmailSend">
+        Ссылка на сброс пароля отправлена на ваш почтовый ящик
+    </string>
     <string name="cancel">Отмена</string>
-
     <string name="failed_email">"Неверный email"</string>
+    <string name="enter_email">Введите email</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="wait">Подождите</string>
+    <string name="login">Вход</string>
+    <string name="user_registration">Регистация пользователя</string>
+    <string name="fill_in_the_details">Заполните данные</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="enter_surname">Введите фамилию</string>
+    <string name="password_error">Пароль должен быть больше 6 символов</string>
 
 </resources>

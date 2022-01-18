@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.esoft.accounting.databinding.FragmentLoginBinding
@@ -14,14 +15,21 @@ import com.esoft.accounting.presentation.dialogFragments.ResetPasswordDialogFrag
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private lateinit var loginBinding: FragmentLoginBinding
-    private lateinit var navController: NavController
-    private lateinit var loginViewModel: LoginViewModel
-    private lateinit var progressDialog: ProgressDialog
-    private lateinit var resetPasswordDialog: ResetPasswordDialogFragment
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+
+    private var navController: NavController? = null
+    private var loginViewModel: LoginViewModel? = null
+
+    private var progressDialog: ProgressDialog? = null
+
+    private var resetPasswordDialog: ResetPasswordDialogFragment? = null
+
+    private companion object {
+        const val dialogTag = "dialogResetPassword"
+    }
 
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
@@ -33,14 +41,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         resetPasswordDialog = ResetPasswordDialogFragment()
 
         progressDialog = ProgressDialog(this.context)
-        progressDialog.setTitle("Подождите")
-        progressDialog.setMessage("Вход")
+        progressDialog!!.setTitle(getString(R.string.wait))
+        progressDialog!!.setMessage(getString(R.string.login))
 
 
-        loginViewModel.getUserLiveData().observe(this,
+        loginViewModel!!.getUserLiveData().observe(this,
             { firebaseUser ->
                 if (firebaseUser != null && firebaseUser.isEmailVerified) {
-                    navController.navigate(R.id.action_loginFragment_to_listFragment)
+                    navController!!.navigate(R.id.action_loginFragment_to_listFragment)
                 }
             })
 
@@ -48,55 +56,55 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginBinding = FragmentLoginBinding.bind(view)
+        _binding = FragmentLoginBinding.bind(view)
 
-        loginBinding.buttonRegister.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        binding.buttonRegister.setOnClickListener {
+            navController!!.navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-        loginBinding.buttonLogin.setOnClickListener {
-            val email = loginBinding.textLoginInput.text.toString()
-            val password = loginBinding.textPassInput.text.toString()
+        binding.buttonLogin.setOnClickListener {
+            val email = binding.textLoginInput.text.toString()
+            val password = binding.textPassInput.text.toString()
             checkField(email = email, password = password)
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                loginViewModel.login(email = email, password = password)
-                progressDialog.show()
-                loginViewModel.getTaskLiveData().observe(viewLifecycleOwner, {
+                loginViewModel!!.login(email = email, password = password)
+                progressDialog!!.show()
+                loginViewModel!!.getTaskLiveData().observe(viewLifecycleOwner, {
                     if (it) {
-                        if (navController.currentDestination?.id == R.id.loginFragment) {
-                            navController.navigate(R.id.action_loginFragment_to_listFragment)
+                        if (navController!!.currentDestination?.id == R.id.loginFragment) {
+                            navController!!.navigate(R.id.action_loginFragment_to_listFragment)
                         }
                     }
-                    progressDialog.dismiss()
+                    progressDialog!!.dismiss()
                 })
             }
         }
 
-        loginBinding.textResetPassword.setOnClickListener {
-            fragmentManager?.let { it1 -> resetPasswordDialog.show(it1, "dialogResetPassword") }
+        binding.textResetPassword.setOnClickListener {
+            fragmentManager?.let { it1 -> resetPasswordDialog!!.show(it1, dialogTag) }
         }
 
     }
 
     private fun checkField(email: String, password: String) {
         if (email.isEmpty()) {
-            loginBinding.textFieldEmail.apply {
-                error = "Введите email"
+            binding.textFieldEmail.apply {
+                error = getString(R.string.enter_email)
                 requestFocus()
             }
             return
         }else {
-            loginBinding.textFieldEmail.error = null
+            binding.textFieldEmail.error = null
         }
 
         if (password.isEmpty()) {
-            loginBinding.textFieldPassword.apply {
-                error = "Введите пароль"
+            binding.textFieldPassword.apply {
+                error = getString(R.string.enter_password)
                 requestFocus()
             }
             return
         }else {
-            loginBinding.textFieldEmail.error = null
+            binding.textFieldEmail.error = null
         }
 
     }

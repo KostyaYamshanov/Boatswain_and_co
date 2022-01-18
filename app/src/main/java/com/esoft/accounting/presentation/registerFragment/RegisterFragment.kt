@@ -15,11 +15,16 @@ import com.esoft.accounting.presentation.dialogFragments.EmailCheckFragment
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
-    lateinit var registerBinding: FragmentRegisterBinding
-    lateinit var navController: NavController
-    private lateinit var viewModel: RegisterViewModel
-    private lateinit var dialogEmailCheck: EmailCheckFragment
-    private lateinit var progressDialog: ProgressDialog
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
+    private var navController: NavController? = null
+    private  var viewModel: RegisterViewModel? = null
+    private  var dialogEmailCheck: EmailCheckFragment? = null
+    private  var progressDialog: ProgressDialog? = null
+
+    private companion object {
+        const val dialogTag = "dialogEmailCheck"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,95 +32,100 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         dialogEmailCheck = EmailCheckFragment(getString(R.string.verification))
 
         progressDialog = ProgressDialog(this.context)
-        progressDialog.setTitle("Подождите")
-        progressDialog.setMessage("Регистация пользователя")
+        progressDialog!!.setTitle(getString(R.string.wait))
+        progressDialog!!.setMessage(getString(R.string.user_registration))
 
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        registerBinding = FragmentRegisterBinding.bind(view)
+        _binding = FragmentRegisterBinding.bind(view)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
-        registerBinding.buttonRegister.setOnClickListener {
-            val email = registerBinding.textLoginInput.text.toString()
-            val password = registerBinding.textPasswordInput.text.toString()
-            val name = registerBinding.textNameInput.text.toString()
-            val female = registerBinding.textFemaleInput.text.toString()
+        binding.buttonRegister.setOnClickListener {
+            val email = binding.textLoginInput.text.toString()
+            val password = binding.textPasswordInput.text.toString()
+            val name = binding.textNameInput.text.toString()
+            val female = binding.textFemaleInput.text.toString()
             checkFields(email = email, name = name, female = female, password = password)
 
             if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && female.isNotEmpty()) {
-                viewModel.register(email = email, password = password, name = name, female = female)
-                progressDialog.show()
-                viewModel.getTaskLiveData().observe(viewLifecycleOwner,
+                viewModel!!.register(email = email, password = password, name = name, female = female)
+                progressDialog!!.show()
+                viewModel!!.getTaskLiveData().observe(viewLifecycleOwner,
                     {
                         if (it) {
-                            fragmentManager?.let { it1 -> dialogEmailCheck.show(it1, "dialogEmailCheck") }
-                            navController.navigateUp()
+                            fragmentManager?.let { it1 -> dialogEmailCheck!!.show(it1, dialogTag) }
+                            navController!!.navigateUp()
                         }
-                        progressDialog.dismiss()
+                        progressDialog!!.dismiss()
                     })
             } else {
-                Toast.makeText(this.context, "Заполните данные!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, getString(R.string.fill_in_the_details), Toast.LENGTH_LONG).show()
             }
         }
 
-        registerBinding.backArrow.setOnClickListener {
-            navController.navigateUp()
+        binding.backArrow.setOnClickListener {
+            navController!!.navigateUp()
         }
     }
 
     private fun checkFields(email: String, name: String, female: String, password: String) {
         if(email.isEmpty()) {
-            registerBinding.textFieldEmail.apply {
-                error = "Введите почту"
+            binding.textFieldEmail.apply {
+                error = getString(R.string.enter_email)
                 requestFocus()
             }
             return
         }else {
-            registerBinding.textFieldEmail.error = null
+            binding.textFieldEmail.error = null
         }
 
         if(name.isEmpty()) {
-            registerBinding.textFieldName.apply {
-                error = "Введите имя"
+            binding.textFieldName.apply {
+                error = getString(R.string.enter_name)
                 requestFocus()
             }
             return
         }else {
-            registerBinding.textFieldName.error = null
+            binding.textFieldName.error = null
         }
         if(female.isEmpty()) {
-            registerBinding.textFieldFemale.apply {
-                error = "Введите фамилию"
+            binding.textFieldFemale.apply {
+                error = getString(R.string.enter_surname)
                 requestFocus()
             }
             return
         }else {
-            registerBinding.textFieldFemale.error = null
+            binding.textFieldFemale.error = null
 
         }
 
         if(password.isEmpty()) {
-            registerBinding.textFieldPassword.apply {
-                error = "Введите пароль"
+            binding.textFieldPassword.apply {
+                error = getString(R.string.enter_password)
                 requestFocus()
             }
             return
         }else {
-            registerBinding.textFieldPassword.error = null
+            binding.textFieldPassword.error = null
         }
         if(password.length < 6) {
-            registerBinding.textFieldPassword.apply {
-                error = "Пароль должен быть 6 символов"
+            binding.textFieldPassword.apply {
+                error = getString(R.string.password_error)
                 requestFocus()
             }
             return
         }else {
-            registerBinding.textFieldPassword.error = null
+            binding.textFieldPassword.error = null
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

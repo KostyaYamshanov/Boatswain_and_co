@@ -11,21 +11,19 @@ import com.esoft.accounting.databinding.FragmentListBinding
 
 class ListFragment : Fragment(R.layout.fragment_list) {
 
-    private lateinit var viewModel: ListFragmentViewModel
-    private lateinit var binding: FragmentListBinding
-    private lateinit var navController: NavController
+    private var viewModel: ListFragmentViewModel? = null
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
         viewModel = ViewModelProvider(
             this,
             ListFragmentViewModelFactory(requireActivity().application)
         ).get(ListFragmentViewModel::class.java)
 
-        viewModel.getUserLiveData().observe(this, {
+        viewModel!!.getUserLiveData().observe(this, {
             if (it != null) {
                 binding.userInfo.userName.text = it.displayName
                 binding.userInfo.userEmail.text = it.email
@@ -36,10 +34,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentListBinding.bind(view)
+        _binding = FragmentListBinding.bind(view)
 
         binding.userInfo.logOutImageBtn.setOnClickListener {
-            viewModel.logOut()
+            viewModel!!.logOut()
         }
 
 
@@ -47,11 +45,15 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getLoggedOutLiveData().observe(viewLifecycleOwner, {
+        viewModel!!.getLoggedOutLiveData().observe(viewLifecycleOwner, {
             if (it) {
-                navController.navigateUp()
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

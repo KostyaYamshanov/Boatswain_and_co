@@ -14,20 +14,26 @@ import com.esoft.accounting.databinding.DialogCheckEmailBinding
 
 class EmailCheckFragment(val text: String): DialogFragment() {
 
-    lateinit var checkEmailBinding: DialogCheckEmailBinding
+    private var _binding: DialogCheckEmailBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        checkEmailBinding = DialogCheckEmailBinding.inflate(inflater, container, false)
+        _binding = DialogCheckEmailBinding.inflate(inflater, container, false)
         onClick()
-        checkEmailBinding.infoText.text = text
-        return checkEmailBinding.root
+        binding.infoText.text = text
+        return binding.root
     }
 
 
     private fun onClick() {
-        checkEmailBinding.okBtn.setOnClickListener {
+        binding.okBtn.setOnClickListener {
             dismiss()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

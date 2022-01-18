@@ -15,8 +15,10 @@ import com.esoft.accounting.databinding.ResetPasswordDialogFragmentBinding
 
 class ResetPasswordDialogFragment : DialogFragment() {
 
-    private lateinit var bindingReset: ResetPasswordDialogFragmentBinding
-    private lateinit var viewModel: ResetPasswordDialogViewModel
+    private var _binding: ResetPasswordDialogFragmentBinding? = null
+    private val binding get() = _binding!!
+
+    private var viewModel: ResetPasswordDialogViewModel? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         viewModel = ViewModelProvider(this, ResetPasswordViewModelFactory(requireActivity().application)).get(ResetPasswordDialogViewModel::class.java)
@@ -29,39 +31,44 @@ class ResetPasswordDialogFragment : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        bindingReset = ResetPasswordDialogFragmentBinding.inflate(inflater, container, false)
+        _binding = ResetPasswordDialogFragmentBinding.inflate(inflater, container, false)
         onClick()
-        return bindingReset.root
+        return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun onClick() {
-        bindingReset.resetBtn.setOnClickListener {
-            val email = bindingReset.textLoginReset.text.toString()
-            viewModel.resetPassword(email = email)
-            viewModel.getTaskLiveData().observe(this, {
+        binding.resetBtn.setOnClickListener {
+            val email = binding.textLoginReset.text.toString()
+            viewModel!!.resetPassword(email = email)
+            viewModel!!.getTaskLiveData().observe(this, {
                 if (!it) {
-                    bindingReset.textFieldEmail.error = getString(R.string.failed_email)
-                    bindingReset.resetLayout.visibility = View.VISIBLE
-                    bindingReset.resetMsgSendLayout.visibility = View.GONE
+                    binding.textFieldEmail.error = getString(R.string.failed_email)
+                    binding.resetLayout.visibility = View.VISIBLE
+                    binding.resetMsgSendLayout.visibility = View.GONE
                 }else{
-                    bindingReset.textFieldEmail.error = null
-                    bindingReset.resetLayout.visibility = View.GONE
-                    bindingReset.resetMsgSendLayout.visibility = View.VISIBLE
+                    binding.textFieldEmail.error = null
+                    binding.resetLayout.visibility = View.GONE
+                    binding.resetMsgSendLayout.visibility = View.VISIBLE
 
                 }
             })
         }
 
-        bindingReset.cancel.setOnClickListener {
+        binding.cancel.setOnClickListener {
             dismiss()
-            bindingReset.textFieldEmail.error = null
-            bindingReset.textLoginReset.text = null
+            binding.textFieldEmail.error = null
+            binding.textLoginReset.text = null
         }
 
-        bindingReset.sendOk.setOnClickListener {
+        binding.sendOk.setOnClickListener {
             dismiss()
-            bindingReset.textFieldEmail.error = null
-            bindingReset.textLoginReset.text = null
+            binding.textFieldEmail.error = null
+            binding.textLoginReset.text = null
         }
     }
 }
