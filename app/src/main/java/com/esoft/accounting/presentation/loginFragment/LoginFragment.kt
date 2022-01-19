@@ -7,7 +7,6 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.esoft.accounting.databinding.FragmentLoginBinding
-import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.R
 import com.esoft.accounting.presentation.dialogFragments.ResetPasswordDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel

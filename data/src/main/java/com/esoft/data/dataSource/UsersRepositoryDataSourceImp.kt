@@ -23,29 +23,30 @@ class UsersRepositoryDataSourceImp: UsersRepositoryDataSource {
 
     override fun getUserProfile(): MutableLiveData<User> {
         val user = firebaseAuth.currentUser
-        val reference = firebaseDataBase.getReference("Users")
-        val userId = user!!.uid
+        if (user != null) {
+            val reference = firebaseDataBase.getReference("Users")
+            val userId = user!!.uid
 
-        reference.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val userProfile = snapshot.getValue(User::class.java)
-                if (userProfile != null) {
-                     val user = User(
-                        email = userProfile.email,
-                        name = userProfile.name,
-                        surname = userProfile.surname,
-                        photoUri = userProfile.photoUri
-                    )
-                    userProfileLiveData.postValue(user)
+            reference.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val userProfile = snapshot.getValue(User::class.java)
+                    if (userProfile != null) {
+                        val user = User(
+                            email = userProfile.email,
+                            name = userProfile.name,
+                            surname = userProfile.surname,
+                            photoUri = userProfile.photoUri
+                        )
+                        userProfileLiveData.postValue(user)
+                    }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
 
-        })
-
+            })
+        }
         return userProfileLiveData
     }
 
