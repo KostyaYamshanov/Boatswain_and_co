@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.app.LabBpmApp
-import com.esoft.accounting.domain.usecase.GetTaskUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.ResetPasswordUseCase
+import com.esoft.domain.usecase.GetTaskUserLiveDataUseCase
+import com.esoft.domain.usecase.ResetPasswordUseCase
 
 class ResetPasswordViewModelFactory(application: Application): ViewModelProvider.Factory {
 

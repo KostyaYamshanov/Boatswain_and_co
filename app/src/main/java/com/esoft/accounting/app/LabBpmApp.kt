@@ -1,12 +1,12 @@
 package com.esoft.accounting.app
 
 import android.app.Application
-import com.esoft.accounting.data.AuthRepositoryDataSourceImpl
-import com.esoft.accounting.data.UsersRepositoryDataSourceImp
-import com.esoft.accounting.data.repository.AuthRepositoryImp
-import com.esoft.accounting.data.repository.UsersRepositoryImp
-import com.esoft.accounting.domain.repository.AuthRepository
-import com.esoft.accounting.domain.repository.UsersRepository
+import com.esoft.data.dataSource.AuthRepositoryDataSourceImpl
+import com.esoft.data.UsersRepositoryDataSourceImp
+import com.esoft.data.repository.AuthRepositoryImp
+import com.esoft.data.repository.UsersRepositoryImp
+import com.esoft.domain.repository.AuthRepository
+import com.esoft.domain.repository.UsersRepository
 
 class LabBpmApp: Application() {
 

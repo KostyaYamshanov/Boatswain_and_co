@@ -2,15 +2,12 @@ package com.esoft.accounting.presentation.listFragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.FragmentListBinding
+import com.esoft.domain.repository.UserModel
 
 class ListFragment : Fragment(R.layout.fragment_list) {
 
@@ -26,16 +23,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             ListFragmentViewModelFactory(requireActivity().application)
         ).get(ListFragmentViewModel::class.java)
 
-        viewModel!!.getUserProfile().observe(this, {
-            if (it != null) {
-                binding.linearList.visibility = View.VISIBLE
-                binding.frameLoading.visibility = View.GONE
-                binding.userInfo.apply {
-                    userName.text = it.name + " " + it.surname
-                    userEmail.text = it.email
-                }
-            }
-        })
+        viewModel!!.getUserProfile().observe(this, ::bindUser)
 
     }
 
@@ -47,6 +35,17 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             viewModel!!.logOut()
         }
 
+    }
+
+    private fun bindUser(user: UserModel) {
+        if(user != null) {
+            binding.linearList.visibility = View.VISIBLE
+            binding.frameLoading.visibility = View.GONE
+            binding.userInfo.apply {
+                userName.text = user.name + " " + user.surname
+                userEmail.text = user.email
+            }
+        }
     }
 
     override fun onResume() {

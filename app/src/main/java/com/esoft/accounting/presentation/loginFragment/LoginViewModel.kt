@@ -2,9 +2,9 @@ package com.esoft.accounting.presentation.loginFragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.esoft.accounting.domain.usecase.GetTaskUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.GetUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.LoginByEmailUseCase
+import com.esoft.domain.usecase.GetTaskUserLiveDataUseCase
+import com.esoft.domain.usecase.GetUserLiveDataUseCase
+import com.esoft.domain.usecase.LoginByEmailUseCase
 import com.google.firebase.auth.FirebaseUser
 
 class LoginViewModel(

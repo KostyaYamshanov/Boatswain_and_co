@@ -2,10 +2,8 @@ package com.esoft.accounting.presentation.dialogFragments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.esoft.accounting.data.AuthRepositoryDataSourceImpl
-import com.esoft.accounting.domain.repository.AuthRepository
-import com.esoft.accounting.domain.usecase.GetTaskUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.ResetPasswordUseCase
+import com.esoft.domain.usecase.GetTaskUserLiveDataUseCase
+import com.esoft.domain.usecase.ResetPasswordUseCase
 
 class ResetPasswordDialogViewModel(
     private val resetPasswordUseCase: ResetPasswordUseCase,

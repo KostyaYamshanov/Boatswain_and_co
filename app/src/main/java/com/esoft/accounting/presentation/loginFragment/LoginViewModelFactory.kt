@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.app.LabBpmApp
-import com.esoft.accounting.domain.usecase.GetTaskUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.GetUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.LoginByEmailUseCase
+import com.esoft.domain.usecase.GetTaskUserLiveDataUseCase
+import com.esoft.domain.usecase.GetUserLiveDataUseCase
+import com.esoft.domain.usecase.LoginByEmailUseCase
 
 class LoginViewModelFactory(application: Application): ViewModelProvider.Factory {
 

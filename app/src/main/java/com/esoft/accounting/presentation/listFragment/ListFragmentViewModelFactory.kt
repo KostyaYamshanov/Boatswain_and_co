@@ -4,9 +4,8 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.app.LabBpmApp
-import com.esoft.accounting.domain.usecase.GetUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.GetUserProfileUseCase
-import com.esoft.accounting.domain.usecase.LogOutUserUseCase
+import com.esoft.domain.usecase.GetUserProfileUseCase
+import com.esoft.domain.usecase.LogOutUserUseCase
 
 class ListFragmentViewModelFactory(private val application: Application): ViewModelProvider.Factory {
 
