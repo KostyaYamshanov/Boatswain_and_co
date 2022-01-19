@@ -1,10 +1,12 @@
 package com.esoft.accounting.presentation.loginFragment
 
 import android.annotation.SuppressLint
+import android.app.AppComponentFactory
 import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -108,5 +110,4 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
     }
-
 }

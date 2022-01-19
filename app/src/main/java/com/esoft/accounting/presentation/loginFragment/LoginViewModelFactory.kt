@@ -10,7 +10,7 @@ import com.esoft.accounting.domain.usecase.LoginByEmailUseCase
 
 class LoginViewModelFactory(application: Application): ViewModelProvider.Factory {
 
-    private val repository = (application as LabBpmApp).authRepository
+    private val repository = (application as LabBpmApp).authRepository!!
 
     private val getTaskUserLiveDataUseCase = GetTaskUserLiveDataUseCase(repository)
     private val getUserLiveDataUseCase = GetUserLiveDataUseCase(repository)

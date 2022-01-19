@@ -51,7 +51,7 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
                     // Sign in success, update UI with the signed-in user's information
                     val user = firebaseAuth.currentUser
                     userLiveData.postValue(user!!)
-                    if (user!!.isEmailVerified) {
+                    if (user.isEmailVerified) {
                         userTask.postValue(true)
                         loggedOutLiveData.postValue(false)
                     } else {
@@ -77,11 +77,13 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
                     val user = firebaseAuth.currentUser
                     userLiveData.postValue(user!!)
                     val userR = User(
+                        email = user.email,
                         name = name,
-                        surname = surname
+                        surname = surname,
+                        photoUri = user.photoUrl
                     )
-                    firebaseDataBase.getReference("Users").child(user!!.uid).setValue(userR)
-                    user!!.sendEmailVerification()
+                    firebaseDataBase.getReference("Users").child(user.uid).setValue(userR)
+                    user.sendEmailVerification()
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 userTask.postValue(true)
@@ -124,5 +126,7 @@ class AuthRepositoryDataSourceImpl: AuthRepositoryDataSource {
     override fun getUserLiveData(): MutableLiveData<FirebaseUser> {
         return userLiveData
     }
+
+
 
 }

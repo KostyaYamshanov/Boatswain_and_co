@@ -27,6 +27,4 @@ class AuthRepositoryImp(private val authRepositoryDataSource: AuthRepositoryData
 
     override fun getLoggedOutLiveData(): MutableLiveData<Boolean> =
         authRepositoryDataSource.getLoggedOutLiveData()
-
-
 }

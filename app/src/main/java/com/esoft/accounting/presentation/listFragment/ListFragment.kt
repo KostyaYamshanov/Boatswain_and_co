@@ -2,6 +2,8 @@ package com.esoft.accounting.presentation.listFragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -24,10 +26,14 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             ListFragmentViewModelFactory(requireActivity().application)
         ).get(ListFragmentViewModel::class.java)
 
-        viewModel!!.getUserLiveData().observe(this, {
+        viewModel!!.getUserProfile().observe(this, {
             if (it != null) {
-                binding.userInfo.userName.text = it.displayName
-                binding.userInfo.userEmail.text = it.email
+                binding.linearList.visibility = View.VISIBLE
+                binding.frameLoading.visibility = View.GONE
+                binding.userInfo.apply {
+                    userName.text = it.name + " " + it.surname
+                    userEmail.text = it.email
+                }
             }
         })
 
@@ -40,7 +46,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding.userInfo.logOutImageBtn.setOnClickListener {
             viewModel!!.logOut()
         }
-
 
     }
 

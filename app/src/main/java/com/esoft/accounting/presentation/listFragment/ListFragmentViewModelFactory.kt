@@ -5,19 +5,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.app.LabBpmApp
 import com.esoft.accounting.domain.usecase.GetUserLiveDataUseCase
+import com.esoft.accounting.domain.usecase.GetUserProfileUseCase
 import com.esoft.accounting.domain.usecase.LogOutUserUseCase
 
 class ListFragmentViewModelFactory(private val application: Application): ViewModelProvider.Factory {
 
-    private val repository = (application as LabBpmApp).authRepository
+    private val repository = (application as LabBpmApp).authRepository!!
+    private val usersRepository = (application as LabBpmApp).usersRepository!!
 
     private val logOutUserUseCase = LogOutUserUseCase(repository)
-    private val getUserLiveDataUseCase = GetUserLiveDataUseCase(repository)
+    private val getUserProfileUseCase = GetUserProfileUseCase(usersRepository = usersRepository)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return ListFragmentViewModel(
             logOutUserUseCase = logOutUserUseCase,
-            getUserLiveDataUseCase = getUserLiveDataUseCase
+            getUserProfileUseCase = getUserProfileUseCase
         ) as T
     }
 }
