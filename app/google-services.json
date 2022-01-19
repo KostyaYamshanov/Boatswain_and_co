@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "434470722176",
+    "firebase_url": "https://e-table-d075f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "e-table-d075f",
+    "storage_bucket": "e-table-d075f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434470722176:android:2d9f94c28262a6a7b2a465",
+        "android_client_info": {
+          "package_name": "com.esoft.accounting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434470722176-nhtj0jh5mkg8ka32aagl7j4ulgdfpv0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYkYsL-bLyqtIbmJvFsHHu6diHeWhGLEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434470722176-nhtj0jh5mkg8ka32aagl7j4ulgdfpv0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

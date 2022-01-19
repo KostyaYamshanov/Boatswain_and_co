@@ -1,30 +1,26 @@
 package com.esoft.accounting.presentation.loginFragment
 
-import android.annotation.SuppressLint
-import android.app.AppComponentFactory
 import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.esoft.accounting.databinding.FragmentLoginBinding
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.R
 import com.esoft.accounting.presentation.dialogFragments.ResetPasswordDialogFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private var navController: NavController? = null
-    private var loginViewModel: LoginViewModel? = null
+    private val loginViewModel by viewModel<LoginViewModel>()
 
     private var progressDialog: ProgressDialog? = null
-
+    private var navController: NavController? = null
     private var resetPasswordDialog: ResetPasswordDialogFragment? = null
 
     private companion object {
@@ -34,10 +30,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginViewModel = ViewModelProvider(
-            this,
-            LoginViewModelFactory(application = requireActivity().application)
-        ).get(LoginViewModel::class.java)
 
         resetPasswordDialog = ResetPasswordDialogFragment()
 

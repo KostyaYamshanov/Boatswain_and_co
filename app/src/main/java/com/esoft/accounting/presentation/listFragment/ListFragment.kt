@@ -8,23 +8,18 @@ import androidx.navigation.fragment.findNavController
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.FragmentListBinding
 import com.esoft.domain.repository.UserModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment(R.layout.fragment_list) {
 
-    private var viewModel: ListFragmentViewModel? = null
+    private val viewModel by viewModel<ListFragmentViewModel>()
+
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(
-            this,
-            ListFragmentViewModelFactory(requireActivity().application)
-        ).get(ListFragmentViewModel::class.java)
-
-        viewModel!!.getUserProfile().observe(this, ::bindUser)
-
+        viewModel.getUserProfile().observe(this, ::bindUser)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +27,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         _binding = FragmentListBinding.bind(view)
 
         binding.userInfo.logOutImageBtn.setOnClickListener {
-            viewModel!!.logOut()
+            viewModel.logOut()
         }
 
     }
@@ -50,7 +45,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onResume() {
         super.onResume()
-        viewModel!!.getLoggedOutLiveData().observe(viewLifecycleOwner, {
+        viewModel.getLoggedOutLiveData().observe(viewLifecycleOwner, {
             if (it) {
                 findNavController().popBackStack()
             }

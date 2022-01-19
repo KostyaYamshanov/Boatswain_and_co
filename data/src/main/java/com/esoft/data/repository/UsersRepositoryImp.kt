@@ -5,8 +5,7 @@ import com.esoft.data.UsersRepositoryDataSource
 import com.esoft.domain.repository.UserModel
 import com.esoft.domain.repository.UsersRepository
 
-class UsersRepositoryImp(private val usersRepositoryDataSource: UsersRepositoryDataSource):
-    UsersRepository {
+class UsersRepositoryImp(private val usersRepositoryDataSource: UsersRepositoryDataSource): UsersRepository {
 
 
     override fun getUserProfile(): MutableLiveData<UserModel> {

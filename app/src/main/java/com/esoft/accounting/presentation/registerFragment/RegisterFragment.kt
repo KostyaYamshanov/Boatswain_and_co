@@ -11,13 +11,16 @@ import com.esoft.accounting.databinding.FragmentRegisterBinding
 import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.presentation.dialogFragments.EmailCheckFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private var viewModel: RegisterViewModel? = null
+
+    private val viewModel by viewModel<RegisterViewModel>()
+
     private var dialogEmailCheck: EmailCheckFragment? = null
     private var progressDialog: ProgressDialog? = null
 
@@ -27,7 +30,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, RegisterViewModelFactory(requireActivity().application)).get(RegisterViewModel::class.java)
         dialogEmailCheck = EmailCheckFragment(getString(R.string.verification))
 
         progressDialog = ProgressDialog(this.context)

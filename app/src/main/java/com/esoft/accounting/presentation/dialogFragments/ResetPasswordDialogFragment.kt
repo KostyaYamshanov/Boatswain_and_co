@@ -12,20 +12,20 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.ResetPasswordDialogFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResetPasswordDialogFragment : DialogFragment() {
 
     private var _binding: ResetPasswordDialogFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private var viewModel: ResetPasswordDialogViewModel? = null
+    private val viewModel by viewModel<ResetPasswordDialogViewModel>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        viewModel = ViewModelProvider(this, ResetPasswordViewModelFactory(requireActivity().application)).get(ResetPasswordDialogViewModel::class.java)
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(false)
         dialog.setContentView(R.layout.reset_password_dialog_fragment)
         return dialog
     }
@@ -44,8 +44,8 @@ class ResetPasswordDialogFragment : DialogFragment() {
     private fun onClick() {
         binding.resetBtn.setOnClickListener {
             val email = binding.textLoginReset.text.toString()
-            viewModel!!.resetPassword(email = email)
-            viewModel!!.getTaskLiveData().observe(this, {
+            viewModel.resetPassword(email = email)
+            viewModel.getTaskLiveData().observe(this, {
                 if (!it) {
                     binding.textFieldEmail.error = getString(R.string.failed_email)
                     binding.resetLayout.visibility = View.VISIBLE

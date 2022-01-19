@@ -1,22 +1,22 @@
 package com.esoft.accounting.app
 
 import android.app.Application
-import com.esoft.data.dataSource.AuthRepositoryDataSourceImpl
-import com.esoft.data.UsersRepositoryDataSourceImp
-import com.esoft.data.repository.AuthRepositoryImp
-import com.esoft.data.repository.UsersRepositoryImp
-import com.esoft.domain.repository.AuthRepository
-import com.esoft.domain.repository.UsersRepository
+import com.esoft.accounting.di.appModule
+import com.esoft.accounting.di.dataModule
+import com.esoft.accounting.di.domainModule
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class LabBpmApp: Application() {
 
-    var authRepository: AuthRepository? = null
-    var usersRepository: UsersRepository? = null
-
     override fun onCreate() {
         super.onCreate()
-        authRepository = AuthRepositoryImp(AuthRepositoryDataSourceImpl())
-        usersRepository = UsersRepositoryImp(UsersRepositoryDataSourceImp())
+
+        startKoin {
+            androidLogger(Level.DEBUG)
+            modules(listOf(appModule, domainModule, dataModule))
+        }
 
     }
 
