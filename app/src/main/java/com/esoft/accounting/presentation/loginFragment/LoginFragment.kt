@@ -79,6 +79,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun checkField(email: String, password: String) {
         if (email.isEmpty()) {
             binding.textFieldEmail.apply {

@@ -58,9 +58,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             checkFields(email = email, name = name, surname = surname, password = password)
 
             if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty()) {
-                viewModel!!.register(email = email, password = password, name = name, female = surname)
+                viewModel.register(email = email, password = password, name = name, female = surname)
                 progressDialog!!.show()
-                viewModel!!.getTaskLiveData().observe(viewLifecycleOwner,
+                viewModel.getTaskLiveData().observe(viewLifecycleOwner,
                     {
                         if (it) {
                             fragmentManager?.let { it1 -> dialogEmailCheck!!.show(it1, dialogTag) }
@@ -126,8 +126,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 

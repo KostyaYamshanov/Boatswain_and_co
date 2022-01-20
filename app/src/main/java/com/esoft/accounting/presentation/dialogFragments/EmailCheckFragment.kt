@@ -17,11 +17,10 @@ class EmailCheckFragment(val text: String): DialogFragment() {
     private var _binding: DialogCheckEmailBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DialogCheckEmailBinding.inflate(inflater, container, false)
         onClick()
-        binding.infoText.text = text
-        return binding.root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
 
@@ -31,8 +30,8 @@ class EmailCheckFragment(val text: String): DialogFragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 

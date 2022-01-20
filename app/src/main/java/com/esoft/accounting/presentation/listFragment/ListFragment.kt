@@ -52,8 +52,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 

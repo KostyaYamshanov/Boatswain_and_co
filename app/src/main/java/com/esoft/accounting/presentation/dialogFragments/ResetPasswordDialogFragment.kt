@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.ResetPasswordDialogFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,8 +35,8 @@ class ResetPasswordDialogFragment : DialogFragment() {
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
