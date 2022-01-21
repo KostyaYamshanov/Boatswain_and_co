@@ -37,6 +37,8 @@ private:
 public:
 	SectorWidget (QWidget *parent = nullptr);
 	void SetSector (std:: vector <Sector> *pVector, int iIndex);
+	int Width (void);
+	int Height (void);
 protected:
 	void paintEvent (QPaintEvent *event);
 

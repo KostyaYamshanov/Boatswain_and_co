@@ -66,8 +66,7 @@ void SectorWidget::paintEvent (QPaintEvent *event)
 
 	Painter.setPen (Pen);
 	Painter.setBrush (QBrush (Qt::green));
-	// qDebug ("painting sector x:%d, y:%d, width:%d, height:%d", oSector.LeftX (), oSector.TopY (), oSector.Width (), oSector.Height ());
-	Painter.drawRect (oSector.LeftX (), oSector.TopY (),
+	Painter.drawRect (0, 0,
 				      oSector.Width (), oSector.Height ());
 
 	return;
@@ -75,7 +74,13 @@ void SectorWidget::paintEvent (QPaintEvent *event)
 
 void SectorWidget:: SetSector (std:: vector <Sector> *pVector, int iIndex)
 {
-	oSector = pVector->at(iIndex);
+	Sector oNewSector = pVector->at(iIndex);
+
+	oSector.LeftX (oNewSector.LeftX ());
+	oSector.RightX (oNewSector.RightX ());
+	oSector.TopY (oNewSector.TopY ());
+	oSector.BotY (oNewSector.BotY ());
+
 	this->repaint ();
 }
 
@@ -84,7 +89,17 @@ int Sector:: Width (void)
 	return (RightX () - LeftX ());
 }
 
+int SectorWidget:: Width (void)
+{
+	return (oSector.RightX () - oSector.LeftX ());
+}
+
 int Sector:: Height (void)
 {
 	return (BotY () - TopY ());
+}
+
+int SectorWidget:: Height (void)
+{
+	return (oSector.BotY () - oSector.TopY ());
 }
