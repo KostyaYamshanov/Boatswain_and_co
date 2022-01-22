@@ -2,16 +2,16 @@
 
 void Icon:: SetIcon (QMainWindow *pWindow)
 {
-    char acCompilerPath[256];
-    std::string sGui (PATH_SPLIT_TOKEN);
-    std::string sLbpm (PATH_ADD_TOKEN);
+    Path oPath;
     std::string sPicName (POTATO_PIC_NAME);
+    std::string sFullPath;
 
-    getcwd(acCompilerPath, 256); //this will return path to compilator, but we need upper directory
+    sFullPath = oPath.GetPath();
+    sFullPath = oPath.GetPathToPictures (sFullPath);
 
-    std::string sCurrPath = acCompilerPath;
-    std::string sWorkDir = sCurrPath.substr(0, sCurrPath.find(sGui));
+    sFullPath.append (sPicName);
 
-    sWorkDir.append (sGui + '\\' + sLbpm + '\\' + sPicName);
-    pWindow->setWindowIcon (QIcon (QString::fromStdString(sWorkDir)));
+    pWindow->setWindowIcon (QIcon (QString::fromStdString(sFullPath)));
+
+    return;
 };

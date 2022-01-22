@@ -1,3 +1,8 @@
 .vs/*
-/GUI/build-LabBPM-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/*
-/GUI/LabBPM/LabBPM.pro.user
+GUI/build-LabBPM-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/*
+GUI/build-LabBPM-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/Makefile
+GUI/build-LabBPM-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/Makefile.Debug
+GUI/build-LabBPM-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/Makefile.RElease
+GUI/build-LabBPM-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/main.o
+GUI/LabBPM/LabBPM.pro.user
+out/

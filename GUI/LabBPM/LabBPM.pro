@@ -12,7 +12,9 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     icon.cpp \
-    ghpainter.cpp
+    ghpainter.cpp \
+    sectors.cpp \
+    getpath.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -21,7 +23,9 @@ HEADERS += \
     icon.h \
     ghpainter.h \
     ghtypedefs.h \
-    debtrace.h
+    debtrace.h \
+    sectors.h \
+    getpath.h
 
 QMAKE_CXXFLAGS += -DDEBUG_MODE
 

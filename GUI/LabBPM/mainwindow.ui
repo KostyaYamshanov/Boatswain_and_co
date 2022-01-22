@@ -6,17 +6,343 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1309</width>
+    <height>656</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="lSectOne">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Fixedsys</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Section 1</string>
+    </property>
+   </widget>
+   <widget class="GreenHouse" name="SectionOne" native="true">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>841</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <widget class="SectorWidget" name="Sector_1" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_3" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_4" native="true">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>10</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_5" native="true">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>40</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_6" native="true">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>70</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_7" native="true">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_8" native="true">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>40</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_9" native="true">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>70</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_10" native="true">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>10</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_11" native="true">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>40</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_12" native="true">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>70</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="lSectTwo">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Fixedsys</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Section 2</string>
+    </property>
+   </widget>
+   <widget class="GreenHouse" name="SectionTwo" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>841</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <widget class="SectorWidget" name="Sector_2_2" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>50</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_12" native="true">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>80</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_9" native="true">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>80</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_4" native="true">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_6" native="true">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>80</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_8" native="true">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>50</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_10" native="true">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>20</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_11" native="true">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>50</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_1" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_5" native="true">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>50</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_3" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="SectorWidget" name="Sector_2_7" native="true">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>20</y>
+       <width>120</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1309</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="defaultUp">
+    <bool>true</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GreenHouse</class>
+   <extends>QWidget</extends>
+   <header>ghpainter.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SectorWidget</class>
+   <extends>QWidget</extends>
+   <header>sectors.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

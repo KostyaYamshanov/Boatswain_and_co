@@ -1,61 +1,11 @@
 #include "ghpainter.h"
+#include <QDebug>
 
 GreenHouse:: GreenHouse (QWidget *parent, int iWinWidth) : QWidget (parent)
 {
-	int iCnvrtdVal = 0;
-	TRACE_DBG_FILE_AND_LINE;
 	SetWinWidth (iWinWidth);
-	SetLength (GH_DEFAULT_LENGTH); //order matters, believe me
-	SetWidth (GH_DEFAULT_WIDTH);
-	TRACE_DBG_FILE_AND_LINE;
-	SetVertRampSpacing (GH_DEFAULT_VRAMP_SPACING);
-	TRACE_DBG_FILE_AND_LINE;
-	SetHorRampSpacing (GH_DEFAULT_HRAMP_SPACING);
-	SetHorRampAmount (GH_DEFAULT_HRAMP_AMNT);
-	TRACE_DBG_FILE_AND_LINE;
 	SetVertRampAmount (GH_DEFAULT_VRAMP_AMNT);
-
-	for (int iIndex = 1; iIndex <= GH_DEFAULT_VRAMP_AMNT; iIndex++)
-	{
-		switch (iIndex)
-		{
-			case 1:
-				iCnvrtdVal =
-							(iWinWidth * GH_DEFAULT_VRAMP_LWIDTH) / RealValues.iLength;
-				break;
-
-			case GH_DEFAULT_VRAMP_AMNT:
-				iCnvrtdVal =
-							(iWinWidth * GH_DEFAULT_VRAMP_RWIDTH) / RealValues.iLength;
-				break;
-
-			default:
-				iCnvrtdVal =
-							(iWinWidth * GH_DEFAULT_VRAMP_WIDTH) / RealValues.iLength;
-
-				break;
-		}
-
-		vVRampWidth.push_back (iCnvrtdVal);
-	}
-
-	for (int iIndex = 1; iIndex <= GH_DEFAULT_HRAMP_AMNT; iIndex++)
-	{
-		if ((iIndex == 1) || iIndex == GH_DEFAULT_HRAMP_AMNT)
-		{
-			iCnvrtdVal =
-						(iWinWidth * GH_DEFAULT_HRAMP_BWIDTH) / RealValues.iLength;
-		}
-		else
-		{
-			iCnvrtdVal =
-						(iWinWidth * GH_DEFAULT_HRAMP_WIDTH) / RealValues.iLength;
-		}
-
-		vHRampWidth.push_back (iCnvrtdVal);
-	}
-	TRACE_DBG_FILE_AND_LINE;
-
+	SetHorRampAmount (GH_DEFAULT_HRAMP_AMNT);
 };
 
 void GreenHouse:: SetWidth (int iWidth)
@@ -64,7 +14,7 @@ void GreenHouse:: SetWidth (int iWidth)
 	PxlValues.iWidth =
 				(iWinWidth * RealValues.iWidth) / RealValues.iLength;
 	return;
-};
+}
 
 void GreenHouse:: SetLength (int iLength)
 {
@@ -73,13 +23,14 @@ void GreenHouse:: SetLength (int iLength)
 	PxlValues.iLength =
 				(iWinWidth * RealValues.iLength) / RealValues.iLength;
 	return;
-};
+}
 
 void GreenHouse:: SetVertRampAmount (int iAmonut)
 {
 	iVRampAmnt = iAmonut;
+	qDebug ("set ramp amnt %d", iVRampAmnt);
 	return;
-};
+}
 
 void GreenHouse:: SetVertRampSpacing (int iSpacing)
 {
@@ -87,13 +38,13 @@ void GreenHouse:: SetVertRampSpacing (int iSpacing)
 	PxlValues.iVRampSpacing = 
 				(iWinWidth * RealValues.iVRampSpacing) / RealValues.iLength;
 	return;
-};
+}
 
 void GreenHouse:: SetHorRampAmount (int iAmonut)
 {
 	iHRampAmnt = iAmonut;
 	return;
-};
+}
 
 void GreenHouse:: SetHorRampSpacing (int iSpacing)
 {
@@ -101,7 +52,7 @@ void GreenHouse:: SetHorRampSpacing (int iSpacing)
 	PxlValues.iHRampSpacing = 
 				(iWinWidth * RealValues.iHRampSpacing) / RealValues.iLength;
 	return;
-};
+}
 
 
 void GreenHouse:: paintEvent (QPaintEvent *event)
@@ -109,7 +60,6 @@ void GreenHouse:: paintEvent (QPaintEvent *event)
 	Q_UNUSED(event);
 
 	QPainter Painter (this);
-
 	QPen Pen(Qt::black, 2, Qt::SolidLine);
 
 	Painter.setPen (Pen);
@@ -218,7 +168,11 @@ bool GreenHouse:: IsReflected (void)
 
 void GreenHouse::SetWinWidth (int iWidth)
 {
+	int iCnvrtdVal = 0;
+
 	iWinWidth = iWidth;
+	vVRampWidth.clear ();
+	vHRampWidth.clear ();
 
 	//iWinWidth stands for maximum available length
 	//My idea:
@@ -229,4 +183,92 @@ void GreenHouse::SetWinWidth (int iWidth)
 	//	of values according to it
 	// It's simple proportion
 	//	X = (iWinWidth * Value) / iRealLength
+
+	SetLength (GH_DEFAULT_LENGTH); //order matters, believe me
+	SetWidth (GH_DEFAULT_WIDTH);
+	SetVertRampSpacing (GH_DEFAULT_VRAMP_SPACING);
+	SetHorRampSpacing (GH_DEFAULT_HRAMP_SPACING);
+
+	for (int iIndex = 1; iIndex <= GH_DEFAULT_VRAMP_AMNT; iIndex++)
+	{
+		switch (iIndex)
+		{
+			case 1:
+				iCnvrtdVal =
+							(iWinWidth * GH_DEFAULT_VRAMP_LWIDTH) / RealValues.iLength;
+				break;
+
+			case GH_DEFAULT_VRAMP_AMNT:
+				iCnvrtdVal =
+							(iWinWidth * GH_DEFAULT_VRAMP_RWIDTH) / RealValues.iLength;
+				break;
+
+			default:
+				iCnvrtdVal =
+							(iWinWidth * GH_DEFAULT_VRAMP_WIDTH) / RealValues.iLength;
+
+				break;
+		}
+
+		vVRampWidth.push_back (iCnvrtdVal);
+	}
+
+	for (int iIndex = 1; iIndex <= GH_DEFAULT_HRAMP_AMNT; iIndex++)
+	{
+		if ((iIndex == 1) || iIndex == GH_DEFAULT_HRAMP_AMNT)
+		{
+			iCnvrtdVal =
+						(iWinWidth * GH_DEFAULT_HRAMP_BWIDTH) / RealValues.iLength;
+		}
+		else
+		{
+			iCnvrtdVal =
+						(iWinWidth * GH_DEFAULT_HRAMP_WIDTH) / RealValues.iLength;
+		}
+
+		vHRampWidth.push_back (iCnvrtdVal);
+	}
+
+}
+
+int GreenHouse::GetHeight (void)
+{
+ return PxlValues.iWidth;
+}
+
+int GreenHouse::GetWidth (void)
+{
+ return PxlValues.iLength;
+}
+
+int GreenHouse::GetVertRampAmnt (void)
+{
+	return iVRampAmnt;
+}
+
+int GreenHouse::GetHorRampAmnt (void)
+{
+	return iHRampAmnt;
+}
+
+int GreenHouse::GetVRampWidth (int iIndex)
+{
+	return vVRampWidth[iIndex];
+}
+
+int GreenHouse::GetHRampWidth (int iIndex)
+{
+	return vHRampWidth[iIndex];
+}
+
+int GreenHouse::GetVRampSpacing (void)
+{
+	return PxlValues.iVRampSpacing;
+
+}
+
+int GreenHouse::GetHRampSpacing (void)
+{
+	return PxlValues.iHRampSpacing;
+
 }
