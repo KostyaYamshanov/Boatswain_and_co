@@ -28,7 +28,6 @@ void GreenHouse:: SetLength (int iLength)
 void GreenHouse:: SetVertRampAmount (int iAmonut)
 {
 	iVRampAmnt = iAmonut;
-	qDebug ("set ramp amnt %d", iVRampAmnt);
 	return;
 }
 
@@ -104,7 +103,7 @@ void GreenHouse:: PrintVRamp (QPainter *pPainter)
 	}
 	else
 	{
-		for (int iRampCounter = iVRampAmnt - 1; iRampCounter >= 0; iRampCounter--)
+		for (int iRampCounter = 0; iRampCounter < iVRampAmnt; iRampCounter++)
 		{
 			// drawrect (Xcoord,Ycoord, width, height)
 			pPainter->drawRect (iLeftPos, GH_INITIAL_Y_POS,
@@ -194,13 +193,29 @@ void GreenHouse::SetWinWidth (int iWidth)
 		switch (iIndex)
 		{
 			case 1:
-				iCnvrtdVal =
-							(iWinWidth * GH_DEFAULT_VRAMP_LWIDTH) / RealValues.iLength;
+				if (!IsReflected ())
+				{
+					iCnvrtdVal =
+								(iWinWidth * GH_DEFAULT_VRAMP_LWIDTH) / RealValues.iLength;
+				}
+				else
+				{
+					iCnvrtdVal =
+								(iWinWidth * GH_DEFAULT_VRAMP_RWIDTH) / RealValues.iLength;
+				}
 				break;
 
 			case GH_DEFAULT_VRAMP_AMNT:
-				iCnvrtdVal =
-							(iWinWidth * GH_DEFAULT_VRAMP_RWIDTH) / RealValues.iLength;
+				if (!IsReflected ())
+				{
+					iCnvrtdVal =
+								(iWinWidth * GH_DEFAULT_VRAMP_RWIDTH) / RealValues.iLength;
+				}
+				else
+				{
+					iCnvrtdVal =
+								(iWinWidth * GH_DEFAULT_VRAMP_LWIDTH) / RealValues.iLength;
+				}
 				break;
 
 			default:

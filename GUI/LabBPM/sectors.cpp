@@ -62,10 +62,10 @@ void SectorWidget::paintEvent (QPaintEvent *event)
 
 	QPainter Painter (this);
 
-	QPen Pen(Qt::green, 2, Qt::SolidLine);
+	QPen Pen(QColorConstants::Svg::lightgreen, 2, Qt::SolidLine);
 
 	Painter.setPen (Pen);
-	Painter.setBrush (QBrush (Qt::green));
+	Painter.setBrush (QBrush (QColorConstants::Svg::lightgreen));
 	Painter.drawRect (0, 0,
 				      oSector.Width (), oSector.Height ());
 

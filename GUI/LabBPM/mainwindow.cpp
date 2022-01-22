@@ -20,6 +20,7 @@ void MainWindow::SetUpGreenHouse (void)
 
     QRect     Screen = QDesktopWidget ().screenGeometry (ui->centralwidget);
     iWidth = Screen.width () * 0.75;
+    Sector TmpSector;
 
     // Section one geometrics
     ui->lSectOne->setGeometry (QRect(20, 10,
@@ -48,6 +49,7 @@ void MainWindow::SetUpGreenHouse (void)
 
     CalculateSectors ();
     //Drawing sectors, huge, long and awful implementation
+
     ui->Sector_1->SetSector (pvSectors, 0);
     ui->Sector_2->SetSector (pvSectors, 1);
     ui->Sector_3->SetSector (pvSectors, 2);
@@ -60,9 +62,9 @@ void MainWindow::SetUpGreenHouse (void)
     ui->Sector_10->SetSector (pvSectors, 9);
     ui->Sector_11->SetSector (pvSectors, 10);
     ui->Sector_12->SetSector (pvSectors, 11);
-    Sector TmpSector;
 
     TmpSector = pvSectors->at (0);
+
     ui->Sector_1->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
                                      ui->Sector_1->Width () + ui->SectionOne->GetVRampWidth(SCT_LEFT_RAMP_IDX),
                                      ui->Sector_1->Height () + ui->SectionOne->GetHRampWidth(SCT_TOP_RAMP_IDX)));
@@ -121,8 +123,10 @@ void MainWindow::SetUpReflection (void)
     int       iWidth;
     int       iSectOneHeight;
     QRect     Screen = QDesktopWidget ().screenGeometry (ui->centralwidget);
-    // Section two geometrics
+    Sector    InitialSector;
+    Sector    TmpSector;
 
+    // Section two geometrics
     iWidth = Screen.width () * 0.75;
     iSectOneHeight = ui->SectionOne->GetHeight () + 50;
     ui->lSectTwo->setGeometry (QRect(20, iSectOneHeight + 10,
@@ -139,6 +143,88 @@ void MainWindow::SetUpReflection (void)
                                  iWidth, Screen.height () * 0.4));
     ui->SectionTwo->setFixedWidth (iWidth);
     ui->SectionTwo->setFixedHeight (Screen.height () * 0.4);
+
+    InitialSector.LeftX (GH_INITIAL_X_POS);
+    InitialSector.RightX (GH_INITIAL_X_POS + ui->SectionTwo->GetWidth ());
+    InitialSector.TopY (GH_INITIAL_Y_POS);
+    InitialSector.BotY (GH_INITIAL_Y_POS + ui->SectionTwo->GetHeight ());
+    pvReflectedSectors->push_back (InitialSector);
+    iReflectedSectorsAmount++;
+
+    CalculateReflectedSectors ();
+
+    ui->Sector_2_1->SetSector (pvReflectedSectors, 0);
+    TmpSector = pvReflectedSectors->at (0);
+    ui->Sector_2_1->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_1->Width () + ui->SectionTwo->GetVRampWidth(SCT_LEFT_RAMP_IDX),
+                                     ui->Sector_2_1->Height () + ui->SectionTwo->GetHRampWidth(SCT_TOP_RAMP_IDX)));
+
+    ui->Sector_2_2->SetSector (pvReflectedSectors, 1);
+    TmpSector = pvReflectedSectors->at (1);
+    ui->Sector_2_2->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_2->Width () + ui->SectionTwo->GetVRampWidth(1),
+                                     ui->Sector_2_2->Height () + ui->SectionTwo->GetHRampWidth(SCT_TOP_RAMP_IDX)));
+
+    ui->Sector_2_3->SetSector (pvReflectedSectors, 2);
+    TmpSector = pvReflectedSectors->at (2);
+    ui->Sector_2_3->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_3->Width () + ui->SectionTwo->GetVRampWidth(2),
+                                     ui->Sector_2_3->Height () + ui->SectionTwo->GetHRampWidth(SCT_TOP_RAMP_IDX)));
+
+    ui->Sector_2_4->SetSector (pvReflectedSectors, 0);
+    TmpSector = pvReflectedSectors->at (3);
+    ui->Sector_2_4->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_4->Width () + ui->SectionTwo->GetVRampWidth(SCT_LEFT_RAMP_IDX),
+                                     ui->Sector_2_4->Height () + ui->SectionTwo->GetHRampWidth(1)));
+
+    ui->Sector_2_5->SetSector (pvReflectedSectors, 1);
+    TmpSector = pvReflectedSectors->at (4);
+    ui->Sector_2_5->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_5->Width () + ui->SectionTwo->GetVRampWidth(1),
+                                     ui->Sector_2_5->Height () + ui->SectionTwo->GetHRampWidth(1)));
+
+    ui->Sector_2_6->SetSector (pvReflectedSectors, 2);
+    TmpSector = pvReflectedSectors->at (5);
+    ui->Sector_2_6->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_6->Width () + ui->SectionTwo->GetVRampWidth(2),
+                                     ui->Sector_2_6->Height () + ui->SectionTwo->GetHRampWidth(1)));
+
+    ui->Sector_2_7->SetSector (pvReflectedSectors, 0);
+    TmpSector = pvReflectedSectors->at (6);
+    ui->Sector_2_7->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_7->Width () + ui->SectionTwo->GetVRampWidth(SCT_LEFT_RAMP_IDX),
+                                     ui->Sector_2_7->Height () + ui->SectionTwo->GetHRampWidth(2)));
+
+    ui->Sector_2_8->SetSector (pvReflectedSectors, 1);
+    TmpSector = pvReflectedSectors->at (7);
+    ui->Sector_2_8->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_8->Width () + ui->SectionTwo->GetVRampWidth(1),
+                                     ui->Sector_2_8->Height () + ui->SectionTwo->GetHRampWidth(2)));
+
+    ui->Sector_2_9->SetSector (pvReflectedSectors, 2);
+    TmpSector = pvReflectedSectors->at (8);
+    ui->Sector_2_9->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_9->Width () + ui->SectionTwo->GetVRampWidth(2),
+                                     ui->Sector_2_9->Height () + ui->SectionTwo->GetHRampWidth(2)));
+
+    ui->Sector_2_10->SetSector (pvReflectedSectors, 0);
+    TmpSector = pvReflectedSectors->at (9);
+    ui->Sector_2_10->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_10->Width () + ui->SectionTwo->GetVRampWidth(SCT_LEFT_RAMP_IDX),
+                                     ui->Sector_2_10->Height () + ui->SectionTwo->GetHRampWidth(3)));
+
+    ui->Sector_2_11->SetSector (pvReflectedSectors, 1);
+    TmpSector = pvReflectedSectors->at (10);
+    ui->Sector_2_11->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_11->Width () + ui->SectionTwo->GetVRampWidth(1),
+                                     ui->Sector_2_11->Height () + ui->SectionTwo->GetHRampWidth(3)));
+
+    ui->Sector_2_12->SetSector (pvReflectedSectors, 2);
+    TmpSector = pvReflectedSectors->at (11);
+    ui->Sector_2_12->setGeometry (QRect(TmpSector.LeftX (), TmpSector.TopY (),
+                                     ui->Sector_2_12->Width () + ui->SectionTwo->GetVRampWidth(2),
+                                     ui->Sector_2_12->Height () + ui->SectionTwo->GetHRampWidth(3)));
+
     this->repaint ();
 }
 
@@ -246,7 +332,7 @@ void MainWindow::HandleSectors (int XLeft, int XRight,
                 }
                 else
                 {
-                    TmpSector.TopY (Ytop + ui->SectionOne->GetHRampWidth(SCT_TOP_RAMP_IDX));
+                    TmpSector.TopY (Ytop + ui->SectionTwo->GetHRampWidth(SCT_TOP_RAMP_IDX));
                     pvReflectedSectors->at (iIndex) = TmpSector;
                 }
                 continue;
@@ -343,10 +429,12 @@ void MainWindow:: CalculateReflectedSectors (void)
 
     iLeftPos = GH_INITIAL_X_POS;
     iVertRamps = ui->SectionTwo->GetVertRampAmnt ();
-    for (int iRampCounter = iVertRamps - 1; iRampCounter >= 0; iRampCounter--)
+
+    for (int iRampCounter = 0; iRampCounter <
+            iVertRamps; iRampCounter++)
     {
-        HandleSectors (iLeftPos, GH_INITIAL_Y_POS,
-                        iLeftPos + ui->SectionTwo->GetVRampWidth(iRampCounter),
+        HandleSectors (iLeftPos, iLeftPos + ui->SectionTwo->GetVRampWidth(iRampCounter),
+                        GH_INITIAL_Y_POS,
                         GH_INITIAL_Y_POS + ui->SectionTwo->GetHeight (),
                         true, true);
 
@@ -362,8 +450,9 @@ void MainWindow:: CalculateReflectedSectors (void)
          iRampCounter >= 0; iRampCounter--)
     {
 
-        HandleSectors (GH_INITIAL_X_POS, iTopPos,
+        HandleSectors (GH_INITIAL_X_POS,
                         GH_INITIAL_X_POS + ui->SectionTwo->GetWidth (),
+                        iTopPos,
                         iTopPos + ui->SectionTwo->GetHRampWidth(iRampCounter),
                         false, true);
 
