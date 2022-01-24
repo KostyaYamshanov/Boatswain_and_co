@@ -103,3 +103,4 @@ int SectorWidget:: Height (void)
 {
 	return (oSector.BotY () - oSector.TopY ());
 }
+
