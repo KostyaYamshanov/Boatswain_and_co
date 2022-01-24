@@ -56,6 +56,7 @@ private:
     void DrawButtons (void);
     void DrawReflectedButtons (void);
     void DropButtonsText (void);
+    void DropColors (int iSectionId, int iSectorId);
     Ui::MainWindow *ui;
     std:: vector <Sector> *pvSectors = new
                            std::vector <Sector> ();

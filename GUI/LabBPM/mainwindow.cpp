@@ -631,7 +631,9 @@ void MainWindow::sector_selected (int iSectionId, int SectorId)
 void MainWindow::on_pbSector_1_clicked()
 {
     std::string sString ("I'm ready");
-
+    DropColors (1, 1);
+    ui->Sector_1->SetPressEvent (true);
+    ui->Sector_1->repaint ();
     DropButtonsText ();
     ui->pbSector_1->setText (QString::fromStdString (sString));
     sector_selected (1, 1);
@@ -642,7 +644,10 @@ void MainWindow::on_pbSector_2_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 2);
     DropButtonsText ();
+    ui->Sector_2->SetPressEvent (true);
+    ui->Sector_2->repaint ();
     ui->pbSector_2->setText (QString::fromStdString (sString));
     sector_selected (1, 2);
     return;
@@ -652,7 +657,10 @@ void MainWindow::on_pbSector_3_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 3);
     DropButtonsText ();
+    ui->Sector_3->SetPressEvent (true);
+    ui->Sector_3->repaint ();
     ui->pbSector_3->setText (QString::fromStdString (sString));
     sector_selected (1, 3);
     return;
@@ -662,7 +670,10 @@ void MainWindow::on_pbSector_4_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 4);
     DropButtonsText ();
+    ui->Sector_4->SetPressEvent (true);
+    ui->Sector_4->repaint ();
     ui->pbSector_4->setText (QString::fromStdString (sString));
     sector_selected (1, 4);
     return;
@@ -672,7 +683,10 @@ void MainWindow::on_pbSector_5_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 5);
     DropButtonsText ();
+    ui->Sector_5->SetPressEvent (true);
+    ui->Sector_5->repaint ();
     ui->pbSector_5->setText (QString::fromStdString (sString));
     sector_selected (1, 5);
     return;
@@ -682,7 +696,10 @@ void MainWindow::on_pbSector_6_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 6);
     DropButtonsText ();
+    ui->Sector_6->SetPressEvent (true);
+    ui->Sector_6->repaint ();
     ui->pbSector_6->setText (QString::fromStdString (sString));
     sector_selected (1, 6);
     return;
@@ -692,7 +709,10 @@ void MainWindow::on_pbSector_7_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 7);
     DropButtonsText ();
+    ui->Sector_7->SetPressEvent (true);
+    ui->Sector_7->repaint ();
     ui->pbSector_7->setText (QString::fromStdString (sString));
     sector_selected (1, 7);
     return;
@@ -702,7 +722,10 @@ void MainWindow::on_pbSector_8_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 8);
     DropButtonsText ();
+    ui->Sector_8->SetPressEvent (true);
+    ui->Sector_8->repaint ();
     ui->pbSector_8->setText (QString::fromStdString (sString));
     sector_selected (1, 8);
     return;
@@ -712,7 +735,10 @@ void MainWindow::on_pbSector_9_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 9);
     DropButtonsText ();
+    ui->Sector_9->SetPressEvent (true);
+    ui->Sector_9->repaint ();
     ui->pbSector_9->setText (QString::fromStdString (sString));
     sector_selected (1, 9);
     return;
@@ -722,7 +748,10 @@ void MainWindow::on_pbSector_10_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 10);
     DropButtonsText ();
+    ui->Sector_10->SetPressEvent (true);
+    ui->Sector_10->repaint ();
     ui->pbSector_10->setText (QString::fromStdString (sString));
     sector_selected (1, 10);
     return;
@@ -732,7 +761,10 @@ void MainWindow::on_pbSector_11_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 11);
     DropButtonsText ();
+    ui->Sector_11->SetPressEvent (true);
+    ui->Sector_11->repaint ();
     ui->pbSector_11->setText (QString::fromStdString (sString));
     sector_selected (1, 11);
     return;
@@ -742,8 +774,10 @@ void MainWindow::on_pbSector_12_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (1, 12);
     DropButtonsText ();
-    ui->pbSector_12->setText (QString::fromStdString (sString));
+    ui->Sector_12->SetPressEvent (true);
+    ui->Sector_12->repaint ();
     sector_selected (1, 12);
     return;
 }
@@ -752,7 +786,10 @@ void MainWindow::on_pbSector_2_1_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 1);
     DropButtonsText ();
+    ui->Sector_2_1->SetPressEvent (true);
+    ui->Sector_2_1->repaint ();
     ui->pbSector_2_1->setText (QString::fromStdString (sString));
     sector_selected (2, 1);
     return;
@@ -762,7 +799,10 @@ void MainWindow::on_pbSector_2_2_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 2);
     DropButtonsText ();
+    ui->Sector_2_2->SetPressEvent (true);
+    ui->Sector_2_2->repaint ();
     ui->pbSector_2_2->setText (QString::fromStdString (sString));
     sector_selected (2, 2);
     return;
@@ -772,7 +812,10 @@ void MainWindow::on_pbSector_2_3_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 3);
     DropButtonsText ();
+    ui->Sector_2_3->SetPressEvent (true);
+    ui->Sector_2_3->repaint ();
     ui->pbSector_2_3->setText (QString::fromStdString (sString));
     sector_selected (2, 3);
     return;
@@ -782,7 +825,10 @@ void MainWindow::on_pbSector_2_4_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 4);
     DropButtonsText ();
+    ui->Sector_2_4->SetPressEvent (true);
+    ui->Sector_2_4->repaint ();
     ui->pbSector_2_4->setText (QString::fromStdString (sString));
     sector_selected (2, 4);
     return;
@@ -792,7 +838,10 @@ void MainWindow::on_pbSector_2_5_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 5);
     DropButtonsText ();
+    ui->Sector_2_5->SetPressEvent (true);
+    ui->Sector_2_5->repaint ();
     ui->pbSector_2_5->setText (QString::fromStdString (sString));
     sector_selected (2, 5);
     return;
@@ -802,7 +851,10 @@ void MainWindow::on_pbSector_2_6_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 6);
     DropButtonsText ();
+    ui->Sector_2_6->SetPressEvent (true);
+    ui->Sector_2_6->repaint ();
     ui->pbSector_2_6->setText (QString::fromStdString (sString));
     sector_selected (2, 6);
     return;
@@ -812,7 +864,10 @@ void MainWindow::on_pbSector_2_7_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 7);
     DropButtonsText ();
+    ui->Sector_2_7->SetPressEvent (true);
+    ui->Sector_2_7->repaint ();
     ui->pbSector_2_7->setText (QString::fromStdString (sString));
     sector_selected (2, 7);
     return;
@@ -822,7 +877,10 @@ void MainWindow::on_pbSector_2_8_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 8);
     DropButtonsText ();
+    ui->Sector_2_8->SetPressEvent (true);
+    ui->Sector_2_8->repaint ();
     ui->pbSector_2_8->setText (QString::fromStdString (sString));
     sector_selected (2, 8);
     return;
@@ -832,7 +890,10 @@ void MainWindow::on_pbSector_2_9_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 9);
     DropButtonsText ();
+    ui->Sector_2_9->SetPressEvent (true);
+    ui->Sector_2_9->repaint ();
     ui->pbSector_2_9->setText (QString::fromStdString (sString));
     sector_selected (2, 9);
     return;
@@ -842,7 +903,10 @@ void MainWindow::on_pbSector_2_10_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 10);
     DropButtonsText ();
+    ui->Sector_2_10->SetPressEvent (true);
+    ui->Sector_2_10->repaint ();
     ui->pbSector_2_10->setText (QString::fromStdString (sString));
     sector_selected (2, 10);
     return;
@@ -852,7 +916,10 @@ void MainWindow::on_pbSector_2_11_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 11);
     DropButtonsText ();
+    ui->Sector_2_11->SetPressEvent (true);
+    ui->Sector_2_11->repaint ();
     ui->pbSector_2_11->setText (QString::fromStdString (sString));
     sector_selected (2, 11);
     return;
@@ -862,7 +929,10 @@ void MainWindow::on_pbSector_2_12_clicked()
 {
     std::string sString ("I'm ready");
 
+    DropColors (2, 12);
     DropButtonsText ();
+    ui->Sector_2_12->SetPressEvent (true);
+    ui->Sector_2_12->repaint ();
     ui->pbSector_2_12->setText (QString::fromStdString (sString));
     sector_selected (2, 12);
     return;
@@ -894,4 +964,124 @@ void MainWindow:: DropButtonsText (void)
     ui->pbSector_2_5->setText(QCoreApplication::translate("MainWindow", "Empty", nullptr));
     ui->pbSector_2_3->setText(QCoreApplication::translate("MainWindow", "Empty", nullptr));
     ui->pbSector_2_7->setText(QCoreApplication::translate("MainWindow", "Empty", nullptr));
+}
+
+void MainWindow:: DropColors (int iSectionId, int iSectorId)
+{
+    static int siSectionId = 0;
+    static int siSectorId = 0;
+
+    if (siSectionId ==1)
+    {
+        switch (siSectorId)
+        {
+            case 1:
+                ui->Sector_1->SetPressEvent (false);
+                ui->Sector_1->repaint ();
+                break;
+            case 2:
+                ui->Sector_2->SetPressEvent (false);
+                ui->Sector_2->repaint ();
+                break;
+            case 3:
+                ui->Sector_3->SetPressEvent (false);
+                ui->Sector_3->repaint ();
+                break;
+            case 4:
+                ui->Sector_4->SetPressEvent (false);
+                ui->Sector_4->repaint ();
+                break;
+            case 5:
+                ui->Sector_5->SetPressEvent (false);
+                ui->Sector_5->repaint ();
+                break;
+            case 6:
+                ui->Sector_6->SetPressEvent (false);
+                ui->Sector_6->repaint ();
+                break;
+            case 7:
+                ui->Sector_7->SetPressEvent (false);
+                ui->Sector_7->repaint ();
+                break;
+            case 8:
+                ui->Sector_8->SetPressEvent (false);
+                ui->Sector_8->repaint ();
+                break;
+            case 9:
+                ui->Sector_9->SetPressEvent (false);
+                ui->Sector_9->repaint ();
+                break;
+            case 10:
+                ui->Sector_10->SetPressEvent (false);
+                ui->Sector_10->repaint ();
+                break;
+            case 11:
+                ui->Sector_11->SetPressEvent (false);
+                ui->Sector_11->repaint ();
+                break;
+            default:
+                ui->Sector_12->SetPressEvent (false);
+                ui->Sector_12->repaint ();
+                break;
+        }
+    }
+    else
+    {
+        switch (siSectorId)
+        {
+            case 1:
+                ui->Sector_2_1->SetPressEvent (false);
+                ui->Sector_2_1->repaint ();
+                break;
+            case 2:
+                ui->Sector_2_2->SetPressEvent (false);
+                ui->Sector_2_2->repaint ();
+                break;
+            case 3:
+                ui->Sector_2_3->SetPressEvent (false);
+                ui->Sector_2_3->repaint ();
+                break;
+            case 4:
+                ui->Sector_2_4->SetPressEvent (false);
+                ui->Sector_2_4->repaint ();
+                break;
+            case 5:
+                ui->Sector_2_5->SetPressEvent (false);
+                ui->Sector_2_5->repaint ();
+                break;
+            case 6:
+                ui->Sector_2_6->SetPressEvent (false);
+                ui->Sector_2_6->repaint ();
+                break;
+            case 7:
+                ui->Sector_2_7->SetPressEvent (false);
+                ui->Sector_2_7->repaint ();
+                break;
+            case 8:
+                ui->Sector_2_8->SetPressEvent (false);
+                ui->Sector_2_8->repaint ();
+                break;
+            case 9:
+                ui->Sector_2_9->SetPressEvent (false);
+                ui->Sector_2_9->repaint ();
+                break;
+            case 10:
+                ui->Sector_2_10->SetPressEvent (false);
+                ui->Sector_2_10->repaint ();
+                break;
+            case 11:
+                ui->Sector_2_11->SetPressEvent (false);
+                ui->Sector_2_11->repaint ();
+                break;
+            default:
+                ui->Sector_2_12->SetPressEvent (false);
+                ui->Sector_2_12->repaint ();
+                break;
+        }
+    }
+
+    siSectionId = iSectionId;
+    siSectorId = iSectorId;
+
+    return;
 }

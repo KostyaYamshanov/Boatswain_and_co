@@ -55,6 +55,7 @@ int Sector::BotY (void)
 
 SectorWidget::SectorWidget (QWidget *parent) : QWidget (parent)
 {
+	bPressEvent = false;
 }
 
 void SectorWidget::paintEvent (QPaintEvent *event)
@@ -62,10 +63,19 @@ void SectorWidget::paintEvent (QPaintEvent *event)
 
 	QPainter Painter (this);
 
-	QPen Pen(QColorConstants::Svg::lightgreen, 2, Qt::SolidLine);
+	if (bPressEvent)
+	{
+		QPen Pen(QColorConstants::Svg::navajowhite, 2, Qt::SolidLine);
+		Painter.setBrush (QBrush (QColorConstants::Svg::navajowhite));
+		Painter.setPen (Pen);
+	}
+	else
+	{
+		QPen Pen(QColorConstants::Svg::lightgreen, 2, Qt::SolidLine);
+		Painter.setBrush (QBrush (QColorConstants::Svg::lightgreen));
+		Painter.setPen (Pen);
+	}
 
-	Painter.setPen (Pen);
-	Painter.setBrush (QBrush (QColorConstants::Svg::lightgreen));
 	Painter.drawRect (0, 0,
 				      oSector.Width (), oSector.Height ());
 
@@ -104,3 +114,7 @@ int SectorWidget:: Height (void)
 	return (oSector.BotY () - oSector.TopY ());
 }
 
+void SectorWidget::SetPressEvent (bool bNewEvent)
+{
+	bPressEvent = bNewEvent;
+}
