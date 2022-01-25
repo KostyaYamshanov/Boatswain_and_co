@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,8 +13,25 @@
     <height>656</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>1</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="font">
+   <font>
+    <family>Fixedsys</family>
+   </font>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="lSectOne">
@@ -24,9 +44,7 @@
      </rect>
     </property>
     <property name="font">
-     <font>
-      <family>Fixedsys</family>
-     </font>
+     <font/>
     </property>
     <property name="text">
      <string>Section 1</string>
@@ -50,6 +68,31 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_1">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2" native="true">
      <property name="geometry">
@@ -60,6 +103,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_3" native="true">
      <property name="geometry">
@@ -70,6 +126,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_4" native="true">
      <property name="geometry">
@@ -80,6 +149,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_5" native="true">
      <property name="geometry">
@@ -90,6 +172,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_6" native="true">
      <property name="geometry">
@@ -100,6 +195,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_7" native="true">
      <property name="geometry">
@@ -110,6 +218,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_7">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_8" native="true">
      <property name="geometry">
@@ -120,6 +241,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_9" native="true">
      <property name="geometry">
@@ -130,6 +264,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_9">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_10" native="true">
      <property name="geometry">
@@ -140,6 +287,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_10">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_11" native="true">
      <property name="geometry">
@@ -150,6 +310,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_11">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_12" native="true">
      <property name="geometry">
@@ -160,6 +333,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_12">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QLabel" name="lSectTwo">
@@ -172,9 +358,7 @@
      </rect>
     </property>
     <property name="font">
-     <font>
-      <family>Fixedsys</family>
-     </font>
+     <font/>
     </property>
     <property name="text">
      <string>Section 2</string>
@@ -198,6 +382,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_12" native="true">
      <property name="geometry">
@@ -208,6 +405,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_12">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_9" native="true">
      <property name="geometry">
@@ -218,6 +428,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_9">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_4" native="true">
      <property name="geometry">
@@ -228,6 +451,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_6" native="true">
      <property name="geometry">
@@ -238,6 +474,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_8" native="true">
      <property name="geometry">
@@ -248,6 +497,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_10" native="true">
      <property name="geometry">
@@ -258,6 +520,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_10">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_11" native="true">
      <property name="geometry">
@@ -268,6 +543,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_11">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_1" native="true">
      <property name="geometry">
@@ -278,6 +566,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_1">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_5" native="true">
      <property name="geometry">
@@ -288,6 +589,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>0</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_3" native="true">
      <property name="geometry">
@@ -298,6 +612,19 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
     <widget class="SectorWidget" name="Sector_2_7" native="true">
      <property name="geometry">
@@ -308,7 +635,33 @@
        <height>31</height>
       </rect>
      </property>
+     <widget class="QPushButton" name="pbSector_2_7">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>80</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
+   </widget>
+   <widget class="QLabel" name="SectorNum">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -341,8 +694,14 @@
    <extends>QWidget</extends>
    <header>sectors.h</header>
    <container>1</container>
+   <slots>
+    <slot>selected()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
+ <slots>
+  <slot>sector_selected()</slot>
+ </slots>
 </ui>

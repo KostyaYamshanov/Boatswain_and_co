@@ -34,12 +34,13 @@ class SectorWidget : public QWidget
 {
 private:
 	Sector oSector;
+	bool bPressEvent;
 public:
 	SectorWidget (QWidget *parent = nullptr);
 	void SetSector (std:: vector <Sector> *pVector, int iIndex);
 	int Width (void);
 	int Height (void);
+	void SetPressEvent (bool bNewEvent);
 protected:
 	void paintEvent (QPaintEvent *event);
-
 };
