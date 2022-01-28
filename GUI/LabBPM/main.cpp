@@ -18,8 +18,13 @@ int main(int argc, char *argv[])
 
     Window.setWindowTitle ("Laboratory Business Process Manager");
     Window.setToolTip ("Laboratory Business Process Manager");
+    qDebug ("trying to set up greenhouse");
     Window.SetUpGreenHouse ();
+    qDebug ("greenhouse good");
     Window.SetUpReflection ();
+    qDebug ("reflection good");
+    Window.SetUpDialogue ();
+    qDebug ("dialogue good");
     Window.showMaximized();
 
     return App.exec ();

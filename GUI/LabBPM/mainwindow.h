@@ -18,8 +18,9 @@ public:
     ~MainWindow();
     void SetUpGreenHouse (void);
     void SetUpReflection (void);
+    void SetUpDialogue (void);
 public slots:
-    void sector_selected (int iSectionId, int SectorId);
+    void sector_selected (void);
 private slots:
     void on_pbSector_1_clicked();
     void on_pbSector_2_clicked();
@@ -46,6 +47,10 @@ private slots:
     void on_pbSector_2_11_clicked();
     void on_pbSector_2_12_clicked();
 
+    void on_leSpecie_editingFinished();
+    void on_lePlantVar_editingFinished();
+    void on_leSpecie_returnPressed();
+
 private:
     void HandleSectors (int XLeft, int XRight,
                         int Ytop, int YBot, bool bVertical, bool bReflected);
@@ -56,7 +61,13 @@ private:
     void DrawButtons (void);
     void DrawReflectedButtons (void);
     void DropButtonsText (void);
+    void DropDialog (void);
     void DropColors (int iSectionId, int iSectorId);
+    void SetSelectedId (int iSection, int iSector);
+    void SetDialoguiePlaceHolders (void);
+    void SetSectorSpecie (void);
+    void SetSectorPlantVar (void);
+
     Ui::MainWindow *ui;
     std:: vector <Sector> *pvSectors = new
                            std::vector <Sector> ();
@@ -64,5 +75,9 @@ private:
                            std::vector <Sector> ();
     int iSectorsAmount;
     int iReflectedSectorsAmount;
+    int iSelectedSectionid;
+    int iSelectedSectorid;
+    std::string sEmpty = "Empty";
+
 };
 #endif // MAINWINDOW_H

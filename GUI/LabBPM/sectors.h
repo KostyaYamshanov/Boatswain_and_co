@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QDebug>
 #include <QFile>
+#include <QString>
 #include "debtrace.h"
 #include "ghpainter.h"
 
@@ -35,9 +36,18 @@ class SectorWidget : public QWidget
 private:
 	Sector oSector;
 	bool bPressEvent;
+	QString sSpecie;
+	QString sPlantVar;
+	QString sEmpty = "Empty";
+
 public:
 	SectorWidget (QWidget *parent = nullptr);
 	void SetSector (std:: vector <Sector> *pVector, int iIndex);
+	void SetSectorSpecie (QString sNewSpecie);
+	void SetSectorPlantVar (QString sNewPlantVar);
+	QString GetSectorSpecie (void);
+	QString GetSectorPlantVar (void);
+	QString GetComboName (void);
 	int Width (void);
 	int Height (void);
 	void SetPressEvent (bool bNewEvent);

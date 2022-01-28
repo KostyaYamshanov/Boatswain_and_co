@@ -56,6 +56,8 @@ int Sector::BotY (void)
 SectorWidget::SectorWidget (QWidget *parent) : QWidget (parent)
 {
 	bPressEvent = false;
+	sSpecie = sEmpty;
+	sPlantVar = sEmpty;
 }
 
 void SectorWidget::paintEvent (QPaintEvent *event)
@@ -117,4 +119,45 @@ int SectorWidget:: Height (void)
 void SectorWidget::SetPressEvent (bool bNewEvent)
 {
 	bPressEvent = bNewEvent;
+}
+
+void SectorWidget:: SetSectorSpecie (QString sNewSpecie)
+{
+	sSpecie = sNewSpecie;
+	return;
+}
+
+QString SectorWidget:: GetSectorSpecie (void)
+{
+	return sSpecie;
+}
+
+void SectorWidget:: SetSectorPlantVar (QString sNewPlantVar)
+{
+	sPlantVar = sNewPlantVar;
+	return;
+}
+
+QString SectorWidget:: GetSectorPlantVar (void)
+{
+	return sPlantVar;
+}
+
+QString SectorWidget:: GetComboName (void)
+{
+	std::string sComboString;
+
+	if (sSpecie != sEmpty)
+	{
+		sComboString = sSpecie.toStdString ();
+		if (sPlantVar != sEmpty)
+		{
+			sComboString.append (" - " + sPlantVar.toStdString ());
+		}
+	}
+	else
+	{
+		sComboString = "Empty";
+	}
+	return QString::fromStdString (sComboString);
 }
