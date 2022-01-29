@@ -1,4 +1,4 @@
-package com.esoft.domain.repository
+package com.esoft.accounting.domain.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser

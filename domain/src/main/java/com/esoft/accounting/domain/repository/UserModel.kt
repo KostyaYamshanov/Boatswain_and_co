@@ -1,8 +1,8 @@
-package com.esoft.data.dataSource.model
+package com.esoft.accounting.domain.repository
 
 import android.net.Uri
 
-class User() {
+class UserModel(){
 
     var email: String? = null
     var name: String? = null
@@ -15,4 +15,10 @@ class User() {
         this.surname = surname
         this.photoUri = photoUri
     }
+
 }
+
+
+
+
+

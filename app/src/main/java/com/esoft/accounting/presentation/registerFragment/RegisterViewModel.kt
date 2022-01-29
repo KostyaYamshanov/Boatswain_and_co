@@ -2,8 +2,8 @@ package com.esoft.accounting.presentation.registerFragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.esoft.domain.usecase.GetTaskUserLiveDataUseCase
-import com.esoft.domain.usecase.RegisterByEmailUseCase
+import com.esoft.accounting.domain.usecase.GetTaskUserLiveDataUseCase
+import com.esoft.accounting.domain.usecase.RegisterByEmailUseCase
 
 class RegisterViewModel(
     private val registerByEmailUseCase: RegisterByEmailUseCase,

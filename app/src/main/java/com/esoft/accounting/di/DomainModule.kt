@@ -1,6 +1,6 @@
 package com.esoft.accounting.di
 
-import com.esoft.domain.usecase.*
+import com.esoft.accounting.domain.usecase.*
 import org.koin.dsl.module
 
 val domainModule = module {

@@ -1,6 +1,6 @@
-package com.esoft.domain.usecase
+package com.esoft.accounting.domain.usecase
 
-import com.esoft.domain.repository.AuthRepository
+import com.esoft.accounting.domain.repository.AuthRepository
 
 class GetUserLiveDataUseCase(private val authRepository: AuthRepository) {
 

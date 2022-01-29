@@ -1,4 +1,4 @@
-package com.esoft.domain
+package com.esoft.accounting.domain
 
 import org.junit.Test
 

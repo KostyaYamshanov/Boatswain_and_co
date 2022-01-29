@@ -3,11 +3,10 @@ package com.esoft.accounting.presentation.listFragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.FragmentListBinding
-import com.esoft.domain.repository.UserModel
+import com.esoft.accounting.domain.repository.UserModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment(R.layout.fragment_list) {
@@ -19,7 +18,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getUserProfile().observe(this, ::bindUser)
+        viewModel.getUserProfile()
+        viewModel.userLiveData.observe(this, ::bindUser)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,7 +29,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding.userInfo.logOutImageBtn.setOnClickListener {
             viewModel.logOut()
         }
-
     }
 
     private fun bindUser(user: UserModel) {
@@ -45,11 +44,11 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getLoggedOutLiveData().observe(viewLifecycleOwner, {
+        viewModel.getLoggedOutLiveData().observe(viewLifecycleOwner) {
             if (it) {
-                findNavController().popBackStack()
+                findNavController().navigateUp()
             }
-        })
+        }
     }
 
     override fun onDestroyView() {

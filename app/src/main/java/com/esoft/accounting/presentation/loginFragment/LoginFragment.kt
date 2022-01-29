@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.esoft.accounting.databinding.FragmentLoginBinding
 import com.esoft.accounting.R
 import com.esoft.accounting.presentation.dialogFragments.ResetPasswordDialogFragment
@@ -19,7 +20,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private val loginViewModel by viewModel<LoginViewModel>()
 
     private var progressDialog: ProgressDialog? = null
-    private var navController: NavController? = null
     private var resetPasswordDialog: ResetPasswordDialogFragment? = null
 
     private companion object {
@@ -37,22 +37,21 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         progressDialog!!.setMessage(getString(R.string.login))
 
 
-        loginViewModel!!.getUserLiveData().observe(this,
-            { firebaseUser ->
-                if (firebaseUser != null && firebaseUser.isEmailVerified) {
-                    navController!!.navigate(R.id.action_loginFragment_to_listFragment)
-                }
-            })
+        loginViewModel!!.getUserLiveData().observe(this
+        ) { firebaseUser ->
+            if (firebaseUser != null && firebaseUser.isEmailVerified) {
+                findNavController().navigate(R.id.action_loginFragment_to_listFragment)
+            }
+        }
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLoginBinding.bind(view)
-        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
         binding.buttonRegister.setOnClickListener {
-            navController!!.navigate(R.id.action_loginFragment_to_registerFragment)
+           findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.buttonLogin.setOnClickListener {
@@ -62,14 +61,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 loginViewModel!!.login(email = email, password = password)
                 progressDialog!!.show()
-                loginViewModel!!.getTaskLiveData().observe(viewLifecycleOwner, {
+                loginViewModel!!.getTaskLiveData().observe(viewLifecycleOwner) {
                     if (it) {
-                        if (navController!!.currentDestination?.id == R.id.loginFragment) {
-                            navController!!.navigate(R.id.action_loginFragment_to_listFragment)
+                        if (findNavController().currentDestination?.id == R.id.loginFragment) {
+                            findNavController().navigate(R.id.action_loginFragment_to_listFragment)
                         }
                     }
                     progressDialog!!.dismiss()
-                })
+                }
             }
         }
 
