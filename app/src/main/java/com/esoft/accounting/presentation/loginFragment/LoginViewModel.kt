@@ -1,31 +1,38 @@
 package com.esoft.accounting.presentation.loginFragment
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.esoft.accounting.domain.usecase.GetTaskUserLiveDataUseCase
-import com.esoft.accounting.domain.usecase.GetUserLiveDataUseCase
+import com.esoft.accounting.domain.repository.AuthState
+import com.esoft.accounting.domain.usecase.IsUserAuthenticated
 import com.esoft.accounting.domain.usecase.LoginByEmailUseCase
-import com.google.firebase.auth.FirebaseUser
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 class LoginViewModel(
     private val loginByEmailUseCase: LoginByEmailUseCase,
-    getUserLiveDataUseCase: GetUserLiveDataUseCase,
-    getTaskUserLiveDataUseCase: GetTaskUserLiveDataUseCase
-    ) : ViewModel(){
+    private val isUserAuthenticated: IsUserAuthenticated
+) : ViewModel() {
 
-    private val userLiveData = getUserLiveDataUseCase.getUserLiveData()
-    private val taskLogin = getTaskUserLiveDataUseCase.getTaskLiveData()
+    val authState = MutableLiveData<AuthState>()
+    val userLiveData = MutableLiveData<Boolean>()
+    private val compositeDisposable = CompositeDisposable()
 
     fun login(email: String, password: String) {
-        loginByEmailUseCase.login(email = email, password = password)
+        val disposable = loginByEmailUseCase.login(email = email, password = password)
+            .subscribeOn(Schedulers.newThread())
+            .subscribe {
+                authState.value = it
+            }
+        compositeDisposable.add(disposable)
     }
 
-    fun getTaskLiveData(): LiveData<Boolean> {
-        return taskLogin
+    fun getUser() {
+        userLiveData.value = isUserAuthenticated.invoke()
     }
 
-    fun getUserLiveData(): LiveData<FirebaseUser> {
-        return userLiveData
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 
 

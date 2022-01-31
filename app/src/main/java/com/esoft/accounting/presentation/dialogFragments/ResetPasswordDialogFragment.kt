@@ -13,7 +13,7 @@ import com.esoft.accounting.R
 import com.esoft.accounting.databinding.ResetPasswordDialogFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ResetPasswordDialogFragment : DialogFragment() {
+class ResetPasswordDialogFragment : DialogFragment(R.layout.reset_password_dialog_fragment) {
 
     private var _binding: ResetPasswordDialogFragmentBinding? = null
     private val binding get() = _binding!!
@@ -29,10 +29,10 @@ class ResetPasswordDialogFragment : DialogFragment() {
         return dialog
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = ResetPasswordDialogFragmentBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = ResetPasswordDialogFragmentBinding.bind(view)
         onClick()
-        return binding.root
     }
 
     override fun onDestroyView() {
@@ -44,8 +44,8 @@ class ResetPasswordDialogFragment : DialogFragment() {
         binding.resetBtn.setOnClickListener {
             val email = binding.textLoginReset.text.toString()
             viewModel.resetPassword(email = email)
-            viewModel.getTaskLiveData().observe(this, {
-                if (!it) {
+            viewModel.resetLiveData.observe(this) {
+                if (it) {
                     binding.textFieldEmail.error = getString(R.string.failed_email)
                     binding.resetLayout.visibility = View.VISIBLE
                     binding.resetMsgSendLayout.visibility = View.GONE
@@ -53,9 +53,8 @@ class ResetPasswordDialogFragment : DialogFragment() {
                     binding.textFieldEmail.error = null
                     binding.resetLayout.visibility = View.GONE
                     binding.resetMsgSendLayout.visibility = View.VISIBLE
-
                 }
-            })
+            }
         }
 
         binding.cancel.setOnClickListener {

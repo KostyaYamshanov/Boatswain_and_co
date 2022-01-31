@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -12,17 +11,16 @@ import androidx.fragment.app.DialogFragment
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.DialogCheckEmailBinding
 
-class EmailCheckFragment(val text: String): DialogFragment() {
+class EmailCheckFragment(): DialogFragment(R.layout.dialog_check_email) {
 
     private var _binding: DialogCheckEmailBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = DialogCheckEmailBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = DialogCheckEmailBinding.bind(view)
         onClick()
-        return super.onCreateView(inflater, container, savedInstanceState)
     }
-
 
     private fun onClick() {
         binding.okBtn.setOnClickListener {
@@ -41,7 +39,7 @@ class EmailCheckFragment(val text: String): DialogFragment() {
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
         dialog.window!!.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.setContentView(R.layout.dialog_check_email);
+        dialog.setContentView(R.layout.dialog_check_email)
         return dialog
     }
 

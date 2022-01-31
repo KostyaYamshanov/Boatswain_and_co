@@ -1,4 +1,4 @@
-package com.esoft.data.repository
+package com.esoft.accounting.data.repository
 
 import com.esoft.accounting.domain.repository.UserModel
 import com.esoft.accounting.domain.repository.UsersRepository
@@ -29,7 +29,6 @@ class UsersRepositoryImp: UsersRepository {
                                 email = userProfile.email,
                                 name = userProfile.name,
                                 surname = userProfile.surname,
-                                photoUri = userProfile.photoUri
                             )
                             subscriber.onNext(user)
                         }

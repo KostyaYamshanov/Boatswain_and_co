@@ -26,11 +26,15 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private companion object {
         const val dialogTag = "dialogEmailCheck"
+        const val error_email_use = "ERROR_EMAIL_ALREADY_IN_USE"
+        const val error_invalid_email = "ERROR_INVALID_EMAIL"
+        const val error_email_not_verified = "Email не подтвержден"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dialogEmailCheck = EmailCheckFragment(getString(R.string.verification))
+
+        dialogEmailCheck = EmailCheckFragment()
 
         progressDialog = ProgressDialog(this.context)
         progressDialog!!.setTitle(getString(R.string.wait))
@@ -55,21 +59,29 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val password = binding.textPasswordInput.text.toString()
             val name = binding.textNameInput.text.toString()
             val surname = binding.textFemaleInput.text.toString()
+
             checkFields(email = email, name = name, surname = surname, password = password)
 
             if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty()) {
                 viewModel.register(email = email, password = password, name = name, female = surname)
                 progressDialog!!.show()
-                viewModel.getTaskLiveData().observe(viewLifecycleOwner
-                ) {
-                    if (it) {
+                viewModel.authState.observe(viewLifecycleOwner) {
+                    Toast.makeText(requireContext(), "AuthResult - ${it.auth}", Toast.LENGTH_LONG).show()
+                    if (it.auth) {
+                        progressDialog!!.dismiss()
                         fragmentManager?.let { it1 -> dialogEmailCheck!!.show(it1, dialogTag) }
                         findNavController().navigateUp()
                     }
-                    progressDialog!!.dismiss()
+                    else{
+                        when(it.error) {
+                            error_email_use -> Toast.makeText(requireContext(), getString(R.string.ERROR_EMAIL_ALREADY_IN_USE), Toast.LENGTH_LONG).show()
+                            error_invalid_email -> Toast.makeText(requireContext(), getString(R.string.ERROR_INVALID_EMAIL), Toast.LENGTH_LONG).show()
+                            error_email_not_verified -> Toast.makeText(requireContext(), getString(R.string.ERROR_EMAIL_NOT_VERIFIED), Toast.LENGTH_LONG).show()
+                        }
+                        Toast.makeText(requireContext(), "AuthResult - ${it.error}", Toast.LENGTH_LONG).show()
+                        progressDialog!!.dismiss()
+                    }
                 }
-            } else {
-                Toast.makeText(this.context, getString(R.string.fill_in_the_details), Toast.LENGTH_LONG).show()
             }
         }
     }

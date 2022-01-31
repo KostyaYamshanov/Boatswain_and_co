@@ -37,4 +37,15 @@
     <string name="password_error">Пароль должен быть больше 6 символов</string>
     <string name="create_account">Создать аккаунт</string>
 
+
+    //Errors Login
+    <string name="ERROR_USER_NOT_FOUND">Пользователь не найден, проверьте введенные данные</string>
+    <string name="ERROR_WRONG_PASSWORD">Неверный пароль</string>
+    <string name="ERROR_INVALID_EMAIL">Неверный email</string>
+
+    //Errors Register
+    <string name="ERROR_EMAIL_ALREADY_IN_USE">Email адресс уже используется</string>
+    <string name="ERROR_EMAIL_NOT_VERIFIED">Email не подтвержден</string>
+
+
 </resources>

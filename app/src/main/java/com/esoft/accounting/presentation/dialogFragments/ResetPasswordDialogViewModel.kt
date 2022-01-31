@@ -1,23 +1,28 @@
 package com.esoft.accounting.presentation.dialogFragments
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.esoft.accounting.domain.usecase.GetTaskUserLiveDataUseCase
 import com.esoft.accounting.domain.usecase.ResetPasswordUseCase
+import io.reactivex.disposables.CompositeDisposable
 
 class ResetPasswordDialogViewModel(
-    private val resetPasswordUseCase: ResetPasswordUseCase,
-    getTaskUserLiveDataUseCase: GetTaskUserLiveDataUseCase
+    private val resetPasswordUseCase: ResetPasswordUseCase
 ): ViewModel() {
 
-    private val taskResetLiveData = getTaskUserLiveDataUseCase.getTaskLiveData()
+    val resetLiveData = MutableLiveData<Boolean>()
+    private val compositeDisposable = CompositeDisposable()
 
     fun resetPassword(email: String) {
-        resetPasswordUseCase.resetPassword(email = email)
+       val dispose =  resetPasswordUseCase.resetPassword(email = email)
+           .subscribe {
+               resetLiveData.value = it
+           }
+        compositeDisposable.add(dispose)
     }
 
-    fun getTaskLiveData(): LiveData<Boolean> {
-        return taskResetLiveData
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 
 }

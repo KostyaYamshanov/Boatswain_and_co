@@ -6,6 +6,4 @@ class LogOutUserUseCase(private val authRepository: AuthRepository) {
 
     fun logOut() = authRepository.logOut()
 
-    fun getLoggedOutLiveData() = authRepository.getLoggedOutLiveData()
-
 }

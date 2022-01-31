@@ -5,14 +5,6 @@ import org.koin.dsl.module
 
 val domainModule = module {
 
-    factory<GetTaskUserLiveDataUseCase> {
-        GetTaskUserLiveDataUseCase(authRepository = get())
-    }
-
-    factory<GetUserLiveDataUseCase> {
-        GetUserLiveDataUseCase(authRepository = get())
-    }
-
     factory<LoginByEmailUseCase> {
         LoginByEmailUseCase(authRepository = get())
     }
@@ -33,6 +25,7 @@ val domainModule = module {
         ResetPasswordUseCase(authRepository = get())
     }
 
-
-
+    factory<IsUserAuthenticated>{
+        IsUserAuthenticated(authRepository = get())
+    }
 }

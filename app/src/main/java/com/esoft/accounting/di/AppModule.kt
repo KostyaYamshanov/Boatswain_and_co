@@ -11,23 +11,20 @@ val appModule = module {
 
     viewModel<LoginViewModel> {
         LoginViewModel(
-            getUserLiveDataUseCase = get(),
-            getTaskUserLiveDataUseCase = get(),
-            loginByEmailUseCase = get()
+            loginByEmailUseCase = get(),
+            isUserAuthenticated = get()
         )
     }
 
     viewModel<RegisterViewModel> {
         RegisterViewModel(
-            getTaskUserLiveDataUseCase = get(),
             registerByEmailUseCase = get()
         )
     }
 
     viewModel<ResetPasswordDialogViewModel> {
         ResetPasswordDialogViewModel(
-            resetPasswordUseCase = get(),
-            getTaskUserLiveDataUseCase = get()
+            resetPasswordUseCase = get()
         )
     }
 

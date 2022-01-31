@@ -26,6 +26,12 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentListBinding.bind(view)
 
+        viewModel.logOutLiveData.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigateUp()
+            }
+        }
+
         binding.userInfo.logOutImageBtn.setOnClickListener {
             viewModel.logOut()
         }
@@ -44,11 +50,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getLoggedOutLiveData().observe(viewLifecycleOwner) {
-            if (it) {
-                findNavController().navigateUp()
-            }
-        }
     }
 
     override fun onDestroyView() {

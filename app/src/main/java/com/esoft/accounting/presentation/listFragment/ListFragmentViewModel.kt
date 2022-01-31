@@ -1,6 +1,5 @@
 package com.esoft.accounting.presentation.listFragment
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.esoft.accounting.domain.repository.UserModel
@@ -15,10 +14,13 @@ class ListFragmentViewModel(
 ): ViewModel() {
 
     val userLiveData = MutableLiveData<UserModel>()
+    val logOutLiveData = MutableLiveData<Boolean>()
     private val compositeDisposable = CompositeDisposable()
 
-    fun logOut() = logOutUserUseCase.logOut()
-    fun getLoggedOutLiveData(): LiveData<Boolean> = logOutUserUseCase.getLoggedOutLiveData()
+    fun logOut() {
+       logOutUserUseCase.logOut()
+        logOutLiveData.value = true
+    }
 
     fun getUserProfile() {
         val dispose = getUserProfileUseCase.getUser()
