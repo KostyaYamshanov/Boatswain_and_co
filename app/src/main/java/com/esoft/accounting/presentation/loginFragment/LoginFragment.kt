@@ -8,6 +8,10 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.esoft.accounting.databinding.FragmentLoginBinding
 import com.esoft.accounting.R
+import com.esoft.accounting.domain.repository.AuthState
+import com.esoft.accounting.helpers.error_invalid_email
+import com.esoft.accounting.helpers.error_user_not_found
+import com.esoft.accounting.helpers.error_wrong_password
 import com.esoft.accounting.presentation.dialogFragments.ResetPasswordDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,43 +20,68 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val loginViewModel by viewModel<LoginViewModel>()
+    private val viewModel by viewModel<LoginViewModel>()
 
     private var progressDialog: ProgressDialog? = null
     private var resetPasswordDialog: ResetPasswordDialogFragment? = null
 
     private companion object {
         const val dialogTag = "dialogResetPassword"
-
-        const val error_user_not_found = "ERROR_USER_NOT_FOUND"
-        const val error_wrong_password = "ERROR_WRONG_PASSWORD"
-        const val error_invalid_email = "ERROR_INVALID_EMAIL"
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginViewModel.getUser()
-
         resetPasswordDialog = ResetPasswordDialogFragment()
+        initProgressDialog()
 
-        progressDialog = ProgressDialog(this.context)
-        progressDialog!!.setTitle(getString(R.string.wait))
-        progressDialog!!.setMessage(getString(R.string.login))
+        viewModel.errorCode.observe(this, ::showErrorMsg)
+        viewModel.authState.observe(this, ::getAuthState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLoginBinding.bind(view)
+        onBtnClick()
 
-        loginViewModel.userLiveData.observe(viewLifecycleOwner) {
+        viewModel.userLiveData.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().navigate(R.id.action_loginFragment_to_listFragment)
             }
         }
+    }
 
+    private fun getAuthState(authState: AuthState) {
+        if (authState.auth) {
+            progressDialog!!.dismiss()
+            if (findNavController().currentDestination?.id == R.id.loginFragment) {
+                findNavController().navigate(R.id.action_loginFragment_to_listFragment)
+            }
+        }else{
+            progressDialog!!.dismiss()
+            Toast.makeText(requireContext(), getString(R.string.ERROR_EMAIL_NOT_VERIFIED), Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun showErrorMsg(error: String) {
+        when(error) {
+            error_user_not_found -> {
+                binding.textFieldEmail.error = getString(R.string.ERROR_USER_NOT_FOUND)
+            }
+            error_wrong_password -> {
+                binding.textFieldPassword.error = getString(R.string.ERROR_WRONG_PASSWORD)
+            }
+            error_invalid_email -> {
+                binding.textFieldEmail.error = getString(R.string.ERROR_INVALID_EMAIL)
+            }
+        }
+        Toast.makeText(requireContext(), "AuthResult - $error", Toast.LENGTH_LONG).show()
+        progressDialog!!.dismiss()
+    }
+
+    private fun onBtnClick() {
         binding.buttonRegister.setOnClickListener {
-           findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.buttonLogin.setOnClickListener {
@@ -60,40 +89,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             val password = binding.textPassInput.text.toString()
             checkField(email = email, password = password)
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                loginViewModel.login(email = email, password = password)
+                viewModel.login(email = email, password = password)
                 progressDialog!!.show()
-                loginViewModel.authState.observe(viewLifecycleOwner) {
-                    if (it.auth) {
-                        progressDialog!!.dismiss()
-                        if (findNavController().currentDestination?.id == R.id.loginFragment) {
-                            findNavController().navigate(R.id.action_loginFragment_to_listFragment)
-                        }
-                    }
-                    else{
-                        when(it.error) {
-                            error_user_not_found ->
-                                Toast.makeText(requireContext(), getString(R.string.ERROR_USER_NOT_FOUND), Toast.LENGTH_LONG).show()
-                            error_wrong_password ->
-                                Toast.makeText(requireContext(), getString(R.string.ERROR_WRONG_PASSWORD), Toast.LENGTH_LONG).show()
-                            error_invalid_email ->
-                                Toast.makeText(requireContext(), getString(R.string.ERROR_INVALID_EMAIL), Toast.LENGTH_LONG).show()
-                        }
-                    }
-                    Toast.makeText(requireContext(), "AuthResult - ${it.error}", Toast.LENGTH_LONG).show()
-                    progressDialog!!.dismiss()
-                }
             }
         }
 
         binding.textResetPassword.setOnClickListener {
             fragmentManager?.let { it1 -> resetPasswordDialog!!.show(it1, dialogTag) }
         }
-
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun initProgressDialog() {
+        progressDialog = ProgressDialog(this.context)
+        progressDialog!!.setTitle(getString(R.string.wait))
+        progressDialog!!.setMessage(getString(R.string.login))
     }
 
     private fun checkField(email: String, password: String) {
@@ -117,5 +126,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             binding.textFieldEmail.error = null
         }
 
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

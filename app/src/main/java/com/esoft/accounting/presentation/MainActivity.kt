@@ -1,4 +1,4 @@
-package com.esoft.accounting
+package com.esoft.accounting.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -8,8 +8,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.database.FirebaseDatabase
-import io.reactivex.Observable
-
+import io.reactivex.Single
 
 class AuthRepositoryImp(
     private val auth: FirebaseAuth,
@@ -19,36 +18,29 @@ class AuthRepositoryImp(
     override fun isUserAuthenticated(): Boolean =
         auth.currentUser != null && auth.currentUser!!.isEmailVerified
 
-    override fun login(email: String, password: String): Observable<AuthState> {
-        return Observable.create { subscriber ->
+    override fun login(email: String, password: String): Single<AuthState> {
+        return Single.create { subscriber ->
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                     if (task.isSuccessful) {
                         val user = auth.currentUser
                         if (user!!.isEmailVerified) {
                             val authState = AuthState(auth = true, error = null)
-                            subscriber.onNext(authState)
+                            subscriber.onSuccess(authState)
                         }else {
-                            val authState = AuthState(auth = false, error = "Email не подтвержден")
-                            subscriber.onNext(authState)
+                            val authState = AuthState(auth = false, error = null)
+                            subscriber.onSuccess(authState)
                         }
                     } else {
-                        val errorCode = (task.exception as FirebaseAuthException?)!!.errorCode
-                        val authState = AuthState(auth = false, error = errorCode)
-                        subscriber.onNext(authState)
+                        subscriber.onError(task.exception as FirebaseAuthException)
                     }
                 })
         }
     }
 
 
-    override fun registration(
-        email: String,
-        password: String,
-        name: String,
-        surname: String
-    ): Observable<AuthState> {
-        return Observable.create { subscriber ->
+    override fun registration(email: String, password: String, name: String, surname: String): Single<AuthState> {
+        return Single.create { subscriber ->
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                     if (task.isSuccessful) {
@@ -56,31 +48,25 @@ class AuthRepositoryImp(
                         val user = auth.currentUser
                         val userR = UserModel(email = user!!.email, name = name, surname = surname)
                         firebaseDataBase.getReference("Users").child(user.uid).setValue(userR)
-                        user.sendEmailVerification().addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val authState = AuthState(auth = true, error = null)
-                                subscriber.onNext(authState)
-                            }
-                            else {
-                                val errorCode = (task.exception as FirebaseAuthException?)!!.errorCode
-                                val authState = AuthState(auth = false, error = errorCode)
-                                subscriber.onNext(authState)
-                            }
-                        }
+                        user.sendEmailVerification()
+                        val authState = AuthState(auth = true, error = null)
+                        subscriber.onSuccess(authState)
                     } else {
-                        val errorCode = (task.exception as FirebaseAuthException?)!!.errorCode
-                        val authState = AuthState(auth = false, error = errorCode)
-                        subscriber.onNext(authState)
+                        subscriber.onError(task.exception as FirebaseAuthException)
                     }
                 })
         }
     }
 
-    override fun resetPassword(email: String): Observable<Boolean> {
-        return Observable.create { subscriber ->
-            if (auth.currentUser != null && auth.currentUser!!.email == email) {
-                auth.sendPasswordResetEmail(email)
-                subscriber.onNext(true)
+    override fun resetPassword(email: String): Single<Boolean> {
+        return Single.create { subscriber ->
+            auth.sendPasswordResetEmail(email).addOnCompleteListener { task->
+                if (task.isSuccessful) {
+                    subscriber.onSuccess(true)
+                }
+                else {
+                    subscriber.onError(task.exception as FirebaseAuthException)
+                }
             }
         }
 

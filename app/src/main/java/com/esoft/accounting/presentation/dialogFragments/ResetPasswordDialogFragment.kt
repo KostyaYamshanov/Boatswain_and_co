@@ -4,13 +4,14 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.esoft.accounting.R
 import com.esoft.accounting.databinding.ResetPasswordDialogFragmentBinding
+import com.esoft.accounting.helpers.error_invalid_email
+import com.esoft.accounting.helpers.error_user_not_found
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResetPasswordDialogFragment : DialogFragment(R.layout.reset_password_dialog_fragment) {
@@ -29,6 +30,12 @@ class ResetPasswordDialogFragment : DialogFragment(R.layout.reset_password_dialo
         return dialog
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.errorCode.observe(this, ::showErrorCode)
+        viewModel.resetLiveData.observe(this, ::getResetStatus)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = ResetPasswordDialogFragmentBinding.bind(view)
@@ -40,21 +47,29 @@ class ResetPasswordDialogFragment : DialogFragment(R.layout.reset_password_dialo
         _binding = null
     }
 
+    private fun showErrorCode(error: String) {
+        when(error) {
+            error_invalid_email -> {
+                binding.textFieldEmail.error = getString(R.string.ERROR_INVALID_EMAIL)
+            }
+            error_user_not_found -> {
+                binding.textFieldEmail.error = getString(R.string.ERROR_USER_NOT_FOUND)
+            }
+        }
+        Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+    }
+
+    private fun getResetStatus(status: Boolean) {
+        if (status){
+            binding.resetLayout.visibility = View.GONE
+            binding.resetMsgSendLayout.visibility = View.VISIBLE
+        }
+    }
+
     private fun onClick() {
         binding.resetBtn.setOnClickListener {
             val email = binding.textLoginReset.text.toString()
             viewModel.resetPassword(email = email)
-            viewModel.resetLiveData.observe(this) {
-                if (it) {
-                    binding.textFieldEmail.error = getString(R.string.failed_email)
-                    binding.resetLayout.visibility = View.VISIBLE
-                    binding.resetMsgSendLayout.visibility = View.GONE
-                }else{
-                    binding.textFieldEmail.error = null
-                    binding.resetLayout.visibility = View.GONE
-                    binding.resetMsgSendLayout.visibility = View.VISIBLE
-                }
-            }
         }
 
         binding.cancel.setOnClickListener {

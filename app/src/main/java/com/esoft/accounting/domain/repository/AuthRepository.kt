@@ -1,14 +1,15 @@
 package com.esoft.accounting.domain.repository
 
 import io.reactivex.Observable
+import io.reactivex.Single
 
 interface AuthRepository {
 
-    fun login(email: String, password: String): Observable<AuthState>
+    fun login(email: String, password: String): Single<AuthState>
 
-    fun registration(email: String, password: String, name: String, surname: String): Observable<AuthState>
+    fun registration(email: String, password: String, name: String, surname: String): Single<AuthState>
 
-    fun resetPassword(email: String): Observable<Boolean>
+    fun resetPassword(email: String): Single<Boolean>
 
     fun logOut()
 
