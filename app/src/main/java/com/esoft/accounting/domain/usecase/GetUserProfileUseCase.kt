@@ -7,6 +7,6 @@ import io.reactivex.Observable
 class GetUserProfileUseCase(private val usersRepository: UsersRepository) {
 
     fun getUser(): Observable<UserModel> =
-        usersRepository.getUserLiveData()
+        usersRepository.getUserInfo()
 
 }

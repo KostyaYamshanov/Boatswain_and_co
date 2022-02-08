@@ -28,4 +28,8 @@ val domainModule = module {
     factory<IsUserAuthenticated>{
         IsUserAuthenticated(authRepository = get())
     }
+
+    factory<GetAllCropsUseCase> {
+        GetAllCropsUseCase(cropRepository = get())
+    }
 }

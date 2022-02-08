@@ -45,5 +45,12 @@
     <string name="ERROR_EMAIL_ALREADY_IN_USE">Email адрес уже используется</string>
     <string name="ERROR_EMAIL_NOT_VERIFIED">Email не подтвержден</string>
 
+    <string name="add_new_entry">Добавить новую запись</string>
+    <string name="add">Добавить</string>
+    <string name="amount">Количество</string>
+    <string name="product_amount">Количество продукта</string>
+    <string name="sort">Сорт</string>
+    <string name="crop">Культура</string>
+
 
 </resources>

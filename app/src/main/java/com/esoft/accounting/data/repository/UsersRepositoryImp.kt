@@ -9,17 +9,18 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import io.reactivex.Observable
 
-class UsersRepositoryImp: UsersRepository {
+class UsersRepositoryImp(
+    private val firebaseAuth: FirebaseAuth,
+    private val firebaseDatabase: FirebaseDatabase
+) : UsersRepository {
 
-    private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val firebaseDataBase: FirebaseDatabase = FirebaseDatabase.getInstance()
 
-    override fun getUserLiveData(): Observable<UserModel> {
+    override fun getUserInfo(): Observable<UserModel> {
         return Observable.create { subscriber ->
             val user = firebaseAuth.currentUser
             if (user != null) {
-                val reference = firebaseDataBase.getReference("Users")
-                val userId = user!!.uid
+                val reference = firebaseDatabase.getReference("Users")
+                val userId = user.uid
 
                 reference.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -29,6 +30,7 @@ class UsersRepositoryImp: UsersRepository {
                                 email = userProfile.email,
                                 name = userProfile.name,
                                 surname = userProfile.surname,
+                                rootUser = userProfile.rootUser
                             )
                             subscriber.onNext(user)
                         }

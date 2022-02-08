@@ -4,24 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:layout_margin="5dp"
     tools:context=".presentation.listFragment.ListFragment">
 
     <LinearLayout
         android:id="@+id/linearList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <include
             android:id="@+id/userInfo"
             layout="@layout/user_info_layout"/>
 
+        <Button
+            android:id="@+id/btnAddNewEntry"
+            style="@style/TextAppearance.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/add_new_entry"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listRecyclerView"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
 
     </LinearLayout>
 

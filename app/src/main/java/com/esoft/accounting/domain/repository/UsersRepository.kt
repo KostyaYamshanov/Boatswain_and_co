@@ -4,6 +4,6 @@ import io.reactivex.Observable
 
 interface UsersRepository {
 
-    fun getUserLiveData(): Observable<UserModel>
+    fun getUserInfo(): Observable<UserModel>
 
 }

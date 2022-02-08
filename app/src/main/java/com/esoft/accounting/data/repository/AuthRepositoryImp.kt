@@ -27,7 +27,7 @@ class AuthRepositoryImp(
                         if (user!!.isEmailVerified) {
                             val authState = AuthState(auth = true, error = null)
                             subscriber.onSuccess(authState)
-                        }else {
+                        } else {
                             val authState = AuthState(auth = false, error = null)
                             subscriber.onSuccess(authState)
                         }
@@ -39,14 +39,24 @@ class AuthRepositoryImp(
     }
 
 
-    override fun registration(email: String, password: String, name: String, surname: String): Single<AuthState> {
+    override fun registration(
+        email: String,
+        password: String,
+        name: String,
+        surname: String
+    ): Single<AuthState> {
         return Single.create { subscriber ->
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         val user = auth.currentUser
-                        val userR = UserModel(email = user!!.email, name = name, surname = surname)
+                        val userR = UserModel(
+                            email = user!!.email,
+                            name = name,
+                            surname = surname,
+                            rootUser = false
+                        )
                         firebaseDataBase.getReference("Users").child(user.uid).setValue(userR)
                         user.sendEmailVerification()
                         val authState = AuthState(auth = true, error = null)
@@ -60,11 +70,10 @@ class AuthRepositoryImp(
 
     override fun resetPassword(email: String): Single<Boolean> {
         return Single.create { subscriber ->
-            auth.sendPasswordResetEmail(email).addOnCompleteListener { task->
+            auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     subscriber.onSuccess(true)
-                }
-                else {
+                } else {
                     subscriber.onError(task.exception as FirebaseAuthException)
                 }
             }

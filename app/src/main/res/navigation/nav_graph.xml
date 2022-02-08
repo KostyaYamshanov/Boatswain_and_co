@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/newRecordingFragment"
-        android:name="com.esoft.accounting.presentation.newRecording.NewRecordingFragment"
+        android:name="com.esoft.accounting.presentation.newEntry.NewEntryFragment"
         android:label="fragment_new_recording"
         tools:layout="@layout/fragment_new_recording" />
 </navigation>

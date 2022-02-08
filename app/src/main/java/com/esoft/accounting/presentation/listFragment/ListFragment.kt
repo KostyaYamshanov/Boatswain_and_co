@@ -16,12 +16,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.getUserProfile()
-        viewModel.userLiveData.observe(this, ::bindUser)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentListBinding.bind(view)
@@ -34,6 +28,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
         binding.userInfo.logOutImageBtn.setOnClickListener {
             viewModel.logOut()
+        }
+
+        binding.btnAddNewEntry.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_newRecordingFragment)
         }
     }
 
@@ -50,6 +48,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onResume() {
         super.onResume()
+        viewModel.getUserProfile()
+        viewModel.userLiveData.observe(this, ::bindUser)
     }
 
     override fun onDestroyView() {
