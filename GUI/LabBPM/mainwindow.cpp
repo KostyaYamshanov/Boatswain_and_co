@@ -255,7 +255,11 @@ void MainWindow:: CalculateSectors (void)
 
     iVertRamps = ui->SectionOne->GetVertRampAmnt ();
 
-    for (int iRampCounter = 0; iRampCounter <
+        HandleSectors (iLeftPos, iLeftPos + ui->SectionOne->GetVRampWidth(0),
+                        GH_INITIAL_Y_POS,
+                        GH_INITIAL_Y_POS + ui->SectionOne->GetHeight (),
+                        true, false);
+/*    for (int iRampCounter = 0; iRampCounter <
             iVertRamps; iRampCounter++)
     {
         HandleSectors (iLeftPos, iLeftPos + ui->SectionOne->GetVRampWidth(iRampCounter),
@@ -266,9 +270,9 @@ void MainWindow:: CalculateSectors (void)
         iLeftPos += (ui->SectionOne->GetVRampWidth(iRampCounter) +
                      ui->SectionOne->GetVRampSpacing ());
     }
-
+*/
     // Calculate horizontals
-    int iTopPos;
+/*    int iTopPos;
     iTopPos = GH_INITIAL_Y_POS;
     for (int iRampCounter = 0; iRampCounter <
          ui->SectionOne->GetHorRampAmnt (); iRampCounter++)
@@ -281,7 +285,7 @@ void MainWindow:: CalculateSectors (void)
         iTopPos += (ui->SectionOne->GetHRampWidth(iRampCounter) +
                     ui->SectionOne->GetHRampSpacing ());
     }
-}
+*/}
 
 void MainWindow:: CalculateReflectedSectors (void)
 {
@@ -292,7 +296,7 @@ void MainWindow:: CalculateReflectedSectors (void)
     iLeftPos = GH_INITIAL_X_POS;
     iVertRamps = ui->SectionTwo->GetVertRampAmnt ();
 
-    for (int iRampCounter = 0; iRampCounter <
+/*    for (int iRampCounter = 0; iRampCounter <
             iVertRamps; iRampCounter++)
     {
         HandleSectors (iLeftPos, iLeftPos + ui->SectionTwo->GetVRampWidth(iRampCounter),
@@ -321,7 +325,7 @@ void MainWindow:: CalculateReflectedSectors (void)
         iTopPos += (ui->SectionTwo->GetHRampWidth(iRampCounter) +
                     ui->SectionTwo->GetHRampSpacing ());
     }
-
+*/
 }
 
 void MainWindow:: DrawSectors (void)
@@ -1930,6 +1934,8 @@ void MainWindow:: DropDialog (void)
     ui->lePlantVar->clear ();
     ui->lePlantVar->setEnabled(false);
     ui->leAmount->clear ();
+    ui->leAmount->setEnabled(false);
     ui->leHeight->clear ();
+    ui->leAmount->setEnabled(false);
     ui->leWidth->clear ();
 }

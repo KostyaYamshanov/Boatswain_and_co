@@ -58,7 +58,11 @@ SectorWidget::SectorWidget (QWidget *parent) : QWidget (parent)
 	bPressEvent = false;
 	sSpecie = sEmpty;
 	sPlantVar = sEmpty;
-}
+/*	iAmount = 0;
+	iPlaceWidth = 0;
+	iPlaceHeight = 0;
+
+*/}
 
 void SectorWidget::paintEvent (QPaintEvent *event)
 {

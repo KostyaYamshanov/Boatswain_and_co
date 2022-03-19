@@ -51,6 +51,8 @@ private slots:
     void on_lePlantVar_editingFinished();
     void on_leSpecie_returnPressed();
 
+    void on_pbRefresh_clicked();
+
 private:
     void HandleSectors (int XLeft, int XRight,
                         int Ytop, int YBot, bool bVertical, bool bReflected);

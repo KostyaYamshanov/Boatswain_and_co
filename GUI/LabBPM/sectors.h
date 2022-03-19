@@ -39,6 +39,9 @@ private:
 	QString sSpecie;
 	QString sPlantVar;
 	QString sEmpty = "Empty";
+	int iAmount;
+	int iPlaceWidth;
+	int iPlaceHeight;
 
 public:
 	SectorWidget (QWidget *parent = nullptr);

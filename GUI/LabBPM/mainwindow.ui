@@ -20,9 +20,7 @@
    </sizepolicy>
   </property>
   <property name="font">
-   <font>
-    <family>Fixedsys</family>
-   </font>
+   <font/>
   </property>
   <property name="cursor">
    <cursorShape>ArrowCursor</cursorShape>
@@ -86,6 +84,9 @@
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
+      <property name="toolTip">
+       <string>Sector 1</string>
+      </property>
       <property name="autoFillBackground">
        <bool>true</bool>
       </property>
@@ -112,6 +113,9 @@
         <height>24</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>Sector 2</string>
+      </property>
       <property name="text">
        <string>PushButton</string>
       </property>
@@ -134,6 +138,9 @@
         <width>80</width>
         <height>24</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>Sector 3</string>
       </property>
       <property name="text">
        <string>PushButton</string>
@@ -662,6 +669,109 @@
     <property name="text">
      <string/>
     </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>20</y>
+      <width>384</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="InfoBox">
+     <item row="2" column="0">
+      <widget class="QLabel" name="lPlantVar">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lPlaceSize">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lePlantVar"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lSpecie">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lAmount">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="leAmount"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="leSpecie"/>
+     </item>
+     <item row="4" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="leWidth"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="lMultiplier">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="leHeight"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="lCentimeter">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="pbRefresh">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="toolTip">
+          <string>Update data with database</string>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbSave">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="toolTip">
+          <string>Send changes to the Database</string>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
