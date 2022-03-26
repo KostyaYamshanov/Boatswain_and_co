@@ -5,6 +5,8 @@ Authorization::Authorization(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Authorization)
 {
+    Icon            IconHandler;
+    IconHandler.SetIcon (this);
     ui->setupUi(this);
     ui->WarnLabel->setVisible(false);
     this->setWindowTitle(QCoreApplication::translate("Authorization", "Authorization", nullptr));

@@ -259,7 +259,7 @@ void MainWindow:: CalculateSectors (void)
                         GH_INITIAL_Y_POS,
                         GH_INITIAL_Y_POS + ui->SectionOne->GetHeight (),
                         true, false);
-/*    for (int iRampCounter = 0; iRampCounter <
+    for (int iRampCounter = 0; iRampCounter <
             iVertRamps; iRampCounter++)
     {
         HandleSectors (iLeftPos, iLeftPos + ui->SectionOne->GetVRampWidth(iRampCounter),
@@ -270,9 +270,9 @@ void MainWindow:: CalculateSectors (void)
         iLeftPos += (ui->SectionOne->GetVRampWidth(iRampCounter) +
                      ui->SectionOne->GetVRampSpacing ());
     }
-*/
+
     // Calculate horizontals
-/*    int iTopPos;
+    int iTopPos;
     iTopPos = GH_INITIAL_Y_POS;
     for (int iRampCounter = 0; iRampCounter <
          ui->SectionOne->GetHorRampAmnt (); iRampCounter++)
@@ -285,7 +285,7 @@ void MainWindow:: CalculateSectors (void)
         iTopPos += (ui->SectionOne->GetHRampWidth(iRampCounter) +
                     ui->SectionOne->GetHRampSpacing ());
     }
-*/}
+}
 
 void MainWindow:: CalculateReflectedSectors (void)
 {
@@ -296,7 +296,7 @@ void MainWindow:: CalculateReflectedSectors (void)
     iLeftPos = GH_INITIAL_X_POS;
     iVertRamps = ui->SectionTwo->GetVertRampAmnt ();
 
-/*    for (int iRampCounter = 0; iRampCounter <
+    for (int iRampCounter = 0; iRampCounter <
             iVertRamps; iRampCounter++)
     {
         HandleSectors (iLeftPos, iLeftPos + ui->SectionTwo->GetVRampWidth(iRampCounter),
@@ -325,7 +325,7 @@ void MainWindow:: CalculateReflectedSectors (void)
         iTopPos += (ui->SectionTwo->GetHRampWidth(iRampCounter) +
                     ui->SectionTwo->GetHRampSpacing ());
     }
-*/
+
 }
 
 void MainWindow:: DrawSectors (void)
@@ -697,7 +697,7 @@ void MainWindow::sector_selected (void)
     else
     {
         int       iSectOneHeight;
-        iSectOneHeight = ui->SectionOne->GetHeight () + 60;
+        iSectOneHeight = iPos + 60;
         ui->SectorNum->setGeometry (QRect(100, iSectOneHeight, 150, 35));
     }
 
@@ -1558,6 +1558,12 @@ void MainWindow::on_lePlantVar_editingFinished()
     SetSectorPlantVar ();
 }
 
+void MainWindow::on_lePlantVar_returnPressed()
+{
+    SetSectorPlantVar ();
+    ui->leAmount->setEnabled (true);
+}
+
 void MainWindow:: SetSectorSpecie (void)
 {
     if (iSelectedSectionid == 1)
@@ -1751,6 +1757,7 @@ void MainWindow:: SetSectorPlantVar (void)
         {
             case 1:
                 ui->Sector_1->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_1->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_1->setText(ui->Sector_1->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_1->setToolTip(ui->Sector_1->GetComboName ());
@@ -1758,6 +1765,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 2:
                 ui->Sector_2->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2->setText(ui->Sector_2->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2->setToolTip(ui->Sector_2->GetComboName ());
@@ -1765,6 +1773,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 3:
                 ui->Sector_3->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_3->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_3->setText(ui->Sector_3->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_3->setToolTip(ui->Sector_3->GetComboName ());
@@ -1772,6 +1781,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 4:
                 ui->Sector_4->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_4->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_4->setText(ui->Sector_4->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_4->setToolTip(ui->Sector_4->GetComboName ());
@@ -1779,6 +1789,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 5:
                 ui->Sector_5->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_5->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_5->setText(ui->Sector_5->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_5->setToolTip(ui->Sector_5->GetComboName ());
@@ -1786,6 +1797,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 6:
                 ui->Sector_6->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_6->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_6->setText(ui->Sector_6->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_6->setToolTip(ui->Sector_6->GetComboName ());
@@ -1793,6 +1805,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 7:
                 ui->Sector_7->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_7->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_7->setText(ui->Sector_7->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_7->setToolTip(ui->Sector_7->GetComboName ());
@@ -1800,6 +1813,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 8:
                 ui->Sector_8->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_8->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_8->setText(ui->Sector_8->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_8->setToolTip(ui->Sector_8->GetComboName ());
@@ -1807,6 +1821,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 9:
                 ui->Sector_9->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_9->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_9->setText(ui->Sector_9->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_9->setToolTip(ui->Sector_9->GetComboName ());
@@ -1814,6 +1829,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 10:
                 ui->Sector_10->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_10->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_10->setText(ui->Sector_10->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_10->setToolTip(ui->Sector_10->GetComboName ());
@@ -1821,6 +1837,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 11:
                 ui->Sector_11->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_11->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_11->setText(ui->Sector_11->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_11->setToolTip(ui->Sector_11->GetComboName ());
@@ -1828,6 +1845,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 12:
                 ui->Sector_12->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_12->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_12->setText(ui->Sector_12->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_12->setToolTip(ui->Sector_12->GetComboName ());
@@ -1841,6 +1859,7 @@ void MainWindow:: SetSectorPlantVar (void)
         {
             case 1:
                 ui->Sector_2_1->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_1->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_1->setText(ui->Sector_2_1->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_1->setToolTip(ui->Sector_2_1->GetComboName ());
@@ -1848,6 +1867,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 2:
                 ui->Sector_2_2->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_2->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_2->setText(ui->Sector_2_2->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_2->setToolTip(ui->Sector_2_2->GetComboName ());
@@ -1855,6 +1875,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 3:
                 ui->Sector_2_3->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_3->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_3->setText(ui->Sector_2_3->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_3->setToolTip(ui->Sector_2_3->GetComboName ());
@@ -1862,6 +1883,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 4:
                 ui->Sector_2_4->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_4->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_4->setText(ui->Sector_2_4->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_4->setToolTip(ui->Sector_2_4->GetComboName ());
@@ -1869,6 +1891,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 5:
                 ui->Sector_2_5->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_5->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_5->setText(ui->Sector_2_5->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_5->setToolTip(ui->Sector_2_5->GetComboName ());
@@ -1876,6 +1899,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 6:
                 ui->Sector_2_6->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_6->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_6->setText(ui->Sector_2_6->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_6->setToolTip(ui->Sector_2_6->GetComboName ());
@@ -1883,6 +1907,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 7:
                 ui->Sector_2_7->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_7->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_7->setText(ui->Sector_2_7->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_7->setToolTip(ui->Sector_2_7->GetComboName ());
@@ -1890,6 +1915,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 8:
                 ui->Sector_2_8->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_8->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_8->setText(ui->Sector_2_8->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_8->setToolTip(ui->Sector_2_8->GetComboName ());
@@ -1897,6 +1923,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 9:
                 ui->Sector_2_9->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_9->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_9->setText(ui->Sector_2_9->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_9->setToolTip(ui->Sector_2_9->GetComboName ());
@@ -1904,6 +1931,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 10:
                 ui->Sector_2_10->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_10->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_10->setText(ui->Sector_2_10->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_10->setToolTip(ui->Sector_2_10->GetComboName ());
@@ -1911,6 +1939,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 11:
                 ui->Sector_2_11->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_11->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_11->setText(ui->Sector_2_11->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_11->setToolTip(ui->Sector_2_11->GetComboName ());
@@ -1918,6 +1947,7 @@ void MainWindow:: SetSectorPlantVar (void)
                 break;
             case 12:
                 ui->Sector_2_12->SetSectorPlantVar (ui->lePlantVar->text ());
+                ui->Sector_2_12->SetSectorPlantAmount (ui->lePlantVar->text ());
                 ui->pbSector_2_12->setText(ui->Sector_2_12->GetComboName ());
 #if QT_CONFIG(tooltip)
                 ui->pbSector_2_11->setToolTip(ui->Sector_2_11->GetComboName ());
@@ -1939,3 +1969,21 @@ void MainWindow:: DropDialog (void)
     ui->leAmount->setEnabled(false);
     ui->leWidth->clear ();
 }
+
+void MainWindow::on_pbRefresh_clicked()
+{
+    return;
+}
+
+
+void MainWindow::on_leAmount_editingFinished()
+{
+    SetSectorPlantVar ();
+}
+
+
+void MainWindow::on_leAmount_returnPressed()
+{
+    SetSectorPlantVar ();
+}
+

@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QString>
 #include <QLineEdit>
+#include <QCloseEvent>
+#include "icon.h"
 
 namespace Ui {
 class Authorization;

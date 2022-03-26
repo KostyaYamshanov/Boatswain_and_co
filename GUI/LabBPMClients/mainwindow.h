@@ -5,6 +5,7 @@
 #include "authorization.h"
 #include "signup.h"
 #include "user.h"
+#include "icon.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

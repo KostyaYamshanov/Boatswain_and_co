@@ -2,6 +2,7 @@
 #define SIGNUP_H
 
 #include <QDialog>
+#include "icon.h"
 
 namespace Ui {
 class SignUp;

@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     hide ();
     ui->HelloLabel->setVisible (false);
     AuthWindow->setModal(true);
-    AuthWindow->show();
+    AuthWindow->show ();
 
     connect (AuthWindow, &Authorization::AuthSignal, this, &MainWindow::AuthSlot);
     connect (AuthWindow, &Authorization::SignUpSignal, this, &MainWindow::SignUpSlot);
@@ -61,4 +61,3 @@ void MainWindow::SignUpFinishedSlot(QString Name, QString Surname,
     ui->HelloLabel->setText (QString::fromStdString(Hello));
     ui->HelloLabel->setVisible (true);
 }
-

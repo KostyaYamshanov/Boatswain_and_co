@@ -4,7 +4,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    MainWindow      w;
+    Icon            IconHandler;
+    IconHandler.SetIcon (&w);
     w.show();
     return a.exec();
 }

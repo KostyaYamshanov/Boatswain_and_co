@@ -8,6 +8,8 @@
 #include <QString>
 #include "debtrace.h"
 #include "ghpainter.h"
+#include <iostream>
+#include <sstream>
 
 class Sector
 {
@@ -48,6 +50,7 @@ public:
 	void SetSector (std:: vector <Sector> *pVector, int iIndex);
 	void SetSectorSpecie (QString sNewSpecie);
 	void SetSectorPlantVar (QString sNewPlantVar);
+	void SetSectorPlantAmount (QString sNewAmount);
 	QString GetSectorSpecie (void);
 	QString GetSectorPlantVar (void);
 	QString GetComboName (void);

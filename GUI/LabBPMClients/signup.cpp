@@ -6,6 +6,9 @@ SignUp::SignUp(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SignUp)
 {
+    Icon            IconHandler;
+    IconHandler.SetIcon (this);
+
     ui->setupUi(this);
     ui->WarnLabel->setVisible(false);
     this->setWindowTitle(QCoreApplication::translate("Authorization", "Sign Up", nullptr));
