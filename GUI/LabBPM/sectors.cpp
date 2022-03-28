@@ -56,12 +56,19 @@ int Sector::BotY (void)
 SectorWidget::SectorWidget (QWidget *parent) : QWidget (parent)
 {
 	bPressEvent = false;
+	sSpecie = sEmpty;
+	sPlantVar = sEmpty;
+	iAmount = 0;
+	iPlaceWidth = 0;
+	iPlaceHeight = 0;
+
 }
 
 void SectorWidget::paintEvent (QPaintEvent *event)
 {
 
 	QPainter Painter (this);
+	Q_UNUSED (event);
 
 	if (bPressEvent)
 	{
@@ -117,4 +124,60 @@ int SectorWidget:: Height (void)
 void SectorWidget::SetPressEvent (bool bNewEvent)
 {
 	bPressEvent = bNewEvent;
+}
+
+void SectorWidget:: SetSectorSpecie (QString sNewSpecie)
+{
+	sSpecie = sNewSpecie;
+	return;
+}
+
+QString SectorWidget:: GetSectorSpecie (void)
+{
+	return sSpecie;
+}
+
+void SectorWidget:: SetSectorPlantVar (QString sNewPlantVar)
+{
+	sPlantVar = sNewPlantVar;
+	return;
+}
+
+void SectorWidget:: SetSectorPlantAmount (QString sNewAmount)
+{
+	std::string sTmpStr = sNewAmount.toStdString ();
+
+	for (char const &c : sTmpStr)
+	{
+		if (std::isdigit(c) == 0)
+			return;
+	}
+	std::stringstream ssString (sTmpStr);
+	ssString >> iAmount;
+	return;
+}
+
+QString SectorWidget:: GetSectorPlantVar (void)
+{
+	return sPlantVar;
+}
+
+QString SectorWidget:: GetComboName (void)
+{
+	std::string sComboString;
+
+	if (sSpecie != sEmpty)
+	{
+		sComboString = sSpecie.toStdString ();
+		if (sPlantVar != sEmpty)
+		{
+			sComboString.append (" - " + sPlantVar.toStdString () +
+						" x " + std::to_string (iAmount));
+		}
+	}
+	else
+	{
+		sComboString = "Empty";
+	}
+	return QString::fromStdString (sComboString);
 }
